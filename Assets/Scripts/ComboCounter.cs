@@ -1,48 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using System.Threading.Tasks;
+using TMPro;
+using UnityEngine;
 
 public class ComboCounter : MonoBehaviour
 {
-    public int counter = 0;
+    public int counter;
     public GameObject player;
-    private PlayerController playerController;
     public TMP_Text comboText;
     public float comboWindowTime = 0.2f;
-    private float comboTimer = 0f;
-    
+    private float _comboTimer;
+    private PlayerController _playerController;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        playerController = player.GetComponent<PlayerController>();
+        _playerController = player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if(!playerController.IsGrounded() || playerController.rampSliding)
+        if (!_playerController.IsGrounded() || _playerController.rampSliding)
         {
-            comboTimer = comboWindowTime;
+            _comboTimer = comboWindowTime;
         }
         else
         {
-            comboTimer -= Time.deltaTime;
+            _comboTimer -= Time.deltaTime;
         }
 
-        if(comboTimer < 0f)
+        if (_comboTimer < 0f)
         {
             counter = 0;
         }
 
-        if(counter == 0)
+        if (counter == 0)
         {
             comboText.text = "";
         }
-        else if(counter > 0)
+        else if (counter > 0)
         {
-            comboText.text = ("Combo\r\nx" + counter);
+            comboText.text = "Combo\r\nx" + counter;
         }
     }
 

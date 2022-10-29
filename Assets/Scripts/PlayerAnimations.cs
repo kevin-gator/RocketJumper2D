@@ -1,53 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 public class PlayerAnimations : MonoBehaviour
 {
-    private PlayerController playerController;
-    private Rigidbody2D rb;
-    private Animator animator;
 
     public Vector2 lookDirection;
     public GameObject rpg;
     public Barrel rpgBarrel;
+    private Animator _animator;
+    private PlayerController _playerController;
+    private Rigidbody2D _rb;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        playerController = gameObject.GetComponent<PlayerController>();
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        animator = gameObject.GetComponent<Animator>();
+        _playerController = gameObject.GetComponent<PlayerController>();
+        _rb = gameObject.GetComponent<Rigidbody2D>();
+        _animator = gameObject.GetComponent<Animator>();
         rpgBarrel = rpg.GetComponent<Barrel>();
 
-        lookDirection = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
-        animator.SetFloat("horizontalMovement", rb.velocity.x);
 
-        animator.SetFloat("verticalMovement", rb.velocity.y);
+        _animator.SetFloat("horizontalMovement", _rb.velocity.x);
 
-        if(playerController.lookingRight)
+        _animator.SetFloat("verticalMovement", _rb.velocity.y);
+
+        if (_playerController.lookingRight)
         {
-            animator.SetBool("lookingRight", true);
+            _animator.SetBool("lookingRight", true);
         }
         else
         {
-            animator.SetBool("lookingRight", false);
+            _animator.SetBool("lookingRight", false);
         }
 
-        if(playerController.IsGrounded())
+        if (_playerController.IsGrounded())
         {
-            animator.SetBool("isGrounded", true);
+            _animator.SetBool("isGrounded", true);
         }
         else
         {
-            animator.SetBool("isGrounded", false);
+            _animator.SetBool("isGrounded", false);
         }
     }
 }

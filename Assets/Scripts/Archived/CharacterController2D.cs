@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using GlobalTypes;
+using System.Collections;
+using UnityEngine;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -11,48 +10,48 @@ public class CharacterController2D : MonoBehaviour
     //flags
     public bool below;
     public GroundType groundType;
-    
-    private Vector2 _moveAmount;
-    private Vector2 _currentPosition;
-    private Vector2 _lastPosition;
-
-    private Rigidbody2D _rigidbody;
     private CapsuleCollider2D _capsuleCollider;
-
-    private Vector2[] _raycastPosition = new Vector2[3];
-    private RaycastHit2D[] _raycastHits = new RaycastHit2D[3];
+    private Vector2 _currentPosition;
 
     private bool _disableGroundCheck;
+    private Vector2 _lastPosition;
 
-    void Start()
+    private Vector2 _moveAmount;
+    private readonly RaycastHit2D[] _raycastHits = new RaycastHit2D[3];
+
+    private readonly Vector2[] _raycastPosition = new Vector2[3];
+
+    private Rigidbody2D _rigidbody;
+
+    private void Start()
     {
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
         _capsuleCollider = gameObject.GetComponent<CapsuleCollider2D>();
 
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         _lastPosition = _rigidbody.position;
 
         _currentPosition = _lastPosition + _moveAmount;
 
         _rigidbody.MovePosition(_currentPosition);
-        
+
         _moveAmount = Vector2.zero;
 
-        if(! _disableGroundCheck)
+        if (!_disableGroundCheck)
         {
-            CheckGrounded(); 
+            CheckGrounded();
         }
-        
+
     }
 
     public void Move(Vector2 movement)
     {
         _moveAmount += movement;
     }
-    
+
     private void CheckGrounded()
     {
         Vector2 raycastOrigin = _rigidbody.position - new Vector2(0, _capsuleCollider.size.y * 0.5f);
@@ -65,18 +64,18 @@ public class CharacterController2D : MonoBehaviour
 
         int numberOfGroundHits = 0;
 
-        for(int i = 0; i < _raycastPosition.Length; i++)
+        for (int i = 0; i < _raycastPosition.Length; i++)
         {
             RaycastHit2D hit = Physics2D.Raycast(_raycastPosition[i], Vector2.down, raycastDistance, layerMask);
 
-            if(hit.collider)
+            if (hit.collider)
             {
                 _raycastHits[i] = hit;
                 numberOfGroundHits++;
             }
         }
 
-        if(numberOfGroundHits > 0)
+        if (numberOfGroundHits > 0)
         {
             if (_raycastHits[1].collider)
             {
@@ -84,7 +83,7 @@ public class CharacterController2D : MonoBehaviour
             }
             else
             {
-                for(int i = 0; i <  _raycastHits.Length; i++)
+                for (int i = 0; i < _raycastHits.Length; i++)
                 {
                     if (_raycastHits[i].collider)
                     {
@@ -117,7 +116,7 @@ public class CharacterController2D : MonoBehaviour
         StartCoroutine("EnableGroundCheck");
     }
 
-    IEnumerator EnableGroundCheck()
+    private IEnumerator EnableGroundCheck()
     {
         yield return new WaitForSeconds(0.1f);
         _disableGroundCheck = false;
@@ -125,14 +124,11 @@ public class CharacterController2D : MonoBehaviour
 
     private GroundType DetermineGroundType(Collider2D collider)
     {
-        if(collider.GetComponent<GroundEffector>())
+        if (collider.GetComponent<GroundEffector>())
         {
             GroundEffector groundEffector = collider.GetComponent<GroundEffector>();
             return groundEffector.groundType;
         }
-        else
-        {
-            return GroundType.LevelGeometry;
-        }
+        return GroundType.LevelGeometry;
     }
 }

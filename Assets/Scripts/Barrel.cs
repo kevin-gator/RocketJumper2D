@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Barrel : MonoBehaviour
@@ -11,35 +9,35 @@ public class Barrel : MonoBehaviour
     private GameObject bullet;
 
     public GameObject muzzleFlash;
-    private MuzzleFlash muzzleFlashScript;
-
-    private Vector2 lookDirection;
-    private float lookAngle;
 
     public float fireSpeed = 20f;
 
     public float fireRate = 0.25f;
-    private float lastFireTime;
 
     public GameObject player;
-    
-    private PlayerController playerController;
-    private Animator playerAnimator;
+    private float _lastFireTime;
+    private float _lookAngle;
+
+    private Vector2 _lookDirection;
+    private MuzzleFlash _muzzleFlashScript;
+    private Animator _playerAnimator;
+
+    private PlayerController _playerController;
 
     private void Start()
     {
-        playerController = player.GetComponent<PlayerController>();
-        playerAnimator = player.GetComponent<Animator>();
-        muzzleFlashScript = muzzleFlash.GetComponent<MuzzleFlash>();
+        _playerController = player.GetComponent<PlayerController>();
+        _playerAnimator = player.GetComponent<Animator>();
+        _muzzleFlashScript = muzzleFlash.GetComponent<MuzzleFlash>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        lookDirection = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, lookAngle);
-        
+        _lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, _lookAngle);
+
         /*if (lookDirection.x >= 0)
         {
         lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
@@ -48,12 +46,12 @@ public class Barrel : MonoBehaviour
         {
             lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
         }*/
-        
-        if (Input.GetMouseButton(0) && Time.time > lastFireTime + fireRate)
+
+        if (Input.GetMouseButton(0) && Time.time > _lastFireTime + fireRate)
         {
             FireBullet();
-            lastFireTime = Time.time;
-            muzzleFlashScript.ActivateMuzzleFlash();
+            _lastFireTime = Time.time;
+            _muzzleFlashScript.ActivateMuzzleFlash();
         }
     }
 
@@ -62,8 +60,8 @@ public class Barrel : MonoBehaviour
         GameObject firedBullet = Instantiate(bullet, barrelTip.position, barrelTip.rotation);
         firedBullet.GetComponent<Rigidbody2D>().velocity = barrelTip.right * fireSpeed;
 
-        playerAnimator.SetTrigger("fireGun");
-        
+        _playerAnimator.SetTrigger("fireGun");
+
         /*
         if (playerController.lookingRight)
         {

@@ -1,33 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RotateRArm : MonoBehaviour
 {
-    private Vector2 lookDirection;
-    private float lookAngle;
-    private PlayerController playerController;
+    private float _lookAngle;
+    private Vector2 _lookDirection;
+    private PlayerController _playerController;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        lookDirection = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        _lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         //lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, lookAngle);
-        
-        if(playerController.lookingRight)
+        transform.rotation = Quaternion.Euler(0f, 0f, _lookAngle);
+
+        if (_playerController.lookingRight)
         {
-            lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+            _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
         }
         else
         {
-            lookAngle = Mathf.Atan2(lookDirection.y, -lookDirection.x) * Mathf.Rad2Deg;
+            _lookAngle = Mathf.Atan2(_lookDirection.y, -_lookDirection.x) * Mathf.Rad2Deg;
         }
     }
 }

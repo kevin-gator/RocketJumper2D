@@ -1,9 +1,4 @@
-using Newtonsoft.Json.Bson;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -11,8 +6,6 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public Transform groundCheck;
     public LayerMask groundLayer;
-
-    private float _input;
     public float speed = 8f;
     public float jumpingPower = 8f;
     public float acceleration = 1f;
@@ -25,14 +18,10 @@ public class PlayerController : MonoBehaviour
     //public float coyoteTime = 0.2f;
     //private float coyoteTimeCounter;
     public float jumpBufferTime = 0.2f;
-    private float jumpBufferCounter;
 
     public bool isMoving;
-    public bool grounded = false;
-    public bool onSlope = false;
-    
-    private Vector2 raycastPosition;
-    private RaycastHit2D raycastHit;
+    public bool grounded;
+    public bool onSlope;
 
     public Vector2 slopeNormal;
     public float slopeAngle;
@@ -44,58 +33,64 @@ public class PlayerController : MonoBehaviour
     public bool lookingRight;
     public bool rampSliding;
 
-    private SpriteRenderer spriteRenderer;
+    private float _input;
+    private float _jumpBufferCounter;
+    private RaycastHit2D _raycastHit;
+
+    private Vector2 _raycastPosition;
+
+    private SpriteRenderer _spriteRenderer;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // rb = GetComponent<Rigidbody2D>();
         // cc = GetComponent<CapsuleCollider2D>();
         // colliderSize = cc.size;
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        
+        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        
-        
-        lookDirection = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+
+        lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         if (lookDirection.x >= 0)
         {
-            spriteRenderer.flipX = false;
+            _spriteRenderer.flipX = false;
             lookingRight = true;
         }
         else if (lookDirection.x < 0)
         {
-            spriteRenderer.flipX = true;
+            _spriteRenderer.flipX = true;
             lookingRight = false;
         }
 
-        raycastPosition = rb.position - new Vector2(0, cc.size.y * 0.5f);
+        _raycastPosition = rb.position - new Vector2(0, cc.size.y * 0.5f);
 
         DrawDebugRays(Vector2.down, Color.green);
 
-        RaycastHit2D hit = Physics2D.Raycast(raycastPosition, Vector2.down, raycastDistance, groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(_raycastPosition, Vector2.down, raycastDistance, groundLayer);
 
         if (hit.collider)
         {
-            raycastHit = hit;
+            _raycastHit = hit;
         }
 
         float targetSpeed = _input * speed;
 
         float speedDiff = targetSpeed - rb.velocity.x;
 
-        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : deceleration;
+        float accelRate = Mathf.Abs(targetSpeed) > 0.01f ? acceleration : deceleration;
 
         float movement = Mathf.Pow(Mathf.Abs(speedDiff) * accelRate, velPower) * Mathf.Sign(speedDiff);
 
-        if(IsGrounded() && rb.velocity.y < rampSlideThreshold)
+        if (IsGrounded() && rb.velocity.y < rampSlideThreshold)
         {
-            slopeNormal = raycastHit.normal;
+            slopeNormal = _raycastHit.normal;
             slopeAngle = Vector2.SignedAngle(slopeNormal, Vector2.up);
             /*
             if(slopeAngle != 0)
@@ -126,7 +121,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(_input * speed * Vector2.right - Vector2.down * gravity);
             grounded = false;
-            if(IsGrounded())
+            if (IsGrounded())
             {
                 rampSliding = true;
             }
@@ -137,7 +132,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Friction
-        if(rb.velocity.y > rampSlideThreshold)
+        if (rb.velocity.y > rampSlideThreshold)
         {
 
         }
@@ -145,7 +140,7 @@ public class PlayerController : MonoBehaviour
         {
             if (IsGrounded() && !isMoving)
             {
-                
+
                 float amount = Mathf.Min(Mathf.Abs(rb.velocity.x), Mathf.Abs(frictionAmount));
 
                 amount *= Mathf.Sign(rb.velocity.x);
@@ -179,7 +174,7 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = true;
         }
-        else if(context.canceled)
+        else if (context.canceled)
         {
             isMoving = false;
         }
@@ -188,26 +183,26 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if (context.started)
         {
-            jumpBufferCounter = jumpBufferTime;
+            _jumpBufferCounter = jumpBufferTime;
         }
         else
         {
-            jumpBufferCounter -= Time.deltaTime;
+            _jumpBufferCounter -= Time.deltaTime;
         }
-        
-        if(jumpBufferCounter > 0f && IsGrounded())
+
+        if (_jumpBufferCounter > 0f && IsGrounded())
         {
             rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
 
-            jumpBufferCounter = 0f;
+            _jumpBufferCounter = 0f;
         }
     }
 
     private void DrawDebugRays(Vector2 direction, Color color)
     {
-        Debug.DrawRay(raycastPosition, direction * raycastDistance, color);
+        Debug.DrawRay(_raycastPosition, direction * raycastDistance, color);
     }
 
     /*

@@ -1,35 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MuzzleFlash : MonoBehaviour
 {
     public GameObject mzFlash;
 
-    private float mzwaitTime = 0.23f;
-    private float mzTimer = 0.0f;
+    private Animator _mzAnimator;
+    private float _mzTimer;
 
-    private Animator mzAnimator;
+    private readonly float _mzwaitTime = 0.23f;
 
-    void Start()
+    private void Start()
     {
-        mzAnimator = gameObject.GetComponent<Animator>();
+        _mzAnimator = gameObject.GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        _mzTimer += Time.deltaTime;
+        if (_mzTimer > _mzwaitTime)
+        {
+            mzFlash.SetActive(false);
+            _mzAnimator.Play("None");
+        }
     }
 
     public void ActivateMuzzleFlash()
     {
         mzFlash.SetActive(true);
-        mzTimer = 0f;
-        mzAnimator.Play("MuzzleFire_Default");
-    }
-
-    void Update()
-    {
-        mzTimer += Time.deltaTime;
-        if (mzTimer > mzwaitTime)
-        {
-            mzFlash.SetActive(false);
-            mzAnimator.Play("None");
-        }
+        _mzTimer = 0f;
+        _mzAnimator.Play("MuzzleFire_Default");
     }
 }

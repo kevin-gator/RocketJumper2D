@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,32 +10,32 @@ public class PlayerController2D : MonoBehaviour
 
     //player state
     public bool isJumping;
-    
-    //input flags
-    private bool _startJump;
-    private bool _releaseJump;
-    
-    private Vector2 _input;
-    private Vector2 _moveDirection;
     private CharacterController2D _characterController;
 
+    private Vector2 _input;
+    private Vector2 _moveDirection;
+    private bool _releaseJump;
+
+    //input flags
+    private bool _startJump;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _characterController = gameObject.GetComponent<CharacterController2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         _moveDirection.x = _input.x;
         _moveDirection.x *= walkSpeed;
 
-        if(_characterController.below) //Grounded
+        if (_characterController.below) //Grounded
         {
             isJumping = false;
-            
-            if(_startJump)
+
+            if (_startJump)
             {
                 _startJump = false;
                 _moveDirection.y = jumpSpeed;
@@ -72,11 +70,11 @@ public class PlayerController2D : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if (context.started)
         {
             _startJump = true;
         }
-        else if(context.canceled)
+        else if (context.canceled)
         {
             _releaseJump = true;
         }
