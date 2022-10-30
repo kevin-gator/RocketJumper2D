@@ -38,9 +38,9 @@ public class ComboCounter : MonoBehaviour
         {
             comboText.text = "";
         }
-        else if (counter > 0)
+        else if (counter > 1)
         {
-            comboText.text = "Combo\r\nx" + counter;
+            comboText.text = "COMBO\r\nx" + counter;
         }
     }
 

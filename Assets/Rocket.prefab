@@ -151,7 +151,7 @@ MonoBehaviour:
   blastRadius: 10
   blastForce: 200
   explosion: {fileID: 3229797619456211106, guid: 184b590b715b8444ca65a93ac9e6d85a, type: 3}
-  player: {fileID: 0}
+  comboSpeedBonus: 0
 --- !u!95 &-3899865396289186057
 Animator:
   serializedVersion: 4

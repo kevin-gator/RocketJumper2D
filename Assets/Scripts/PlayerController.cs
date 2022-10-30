@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class PlayerController : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
 
+    public TMP_Text xVelCounter;
+    public TMP_Text yVelCounter;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -54,8 +58,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-
-
         lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         if (lookDirection.x >= 0)
@@ -148,6 +150,9 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
             }
         }
+
+        xVelCounter.text = "xv:" + (int)Mathf.Abs(Mathf.RoundToInt(rb.velocity.x));
+        yVelCounter.text = "yv:" + (int)Mathf.Abs(Mathf.RoundToInt(rb.velocity.y));
 
         //Coyote Time
         /*

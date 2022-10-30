@@ -31,6 +31,10 @@ public class Rocket : MonoBehaviour
     public float blastRadius = 5f;
     public float blastForce = 700f;
     public GameObject explosion;
+
+    private float _comboMultiplier = 1f;
+    public float comboSpeedBonus;
+
     //public GameObject player = GameObject.Find("Player");
     //private ComboCounter comboCounter;
 
@@ -68,12 +72,17 @@ public class Rocket : MonoBehaviour
             Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
             if (rb != null && rb.gameObject.tag != "NoKnockback")
             {
-                rb.AddExplosionForce(blastForce, transform.position, blastRadius);
+                //rb.AddExplosionForce(blastForce, transform.position, blastRadius);
                 if (rb.gameObject.layer == 3)
                 {
                     ComboCounter comboCounter = rb.gameObject.GetComponent<ComboCounter>();
                     comboCounter.AddCount();
-                    //Debug.Log("RocketJump");
+                    _comboMultiplier = (float)comboCounter.counter * comboSpeedBonus;
+                    rb.AddExplosionForce(blastForce, transform.position, blastRadius *(1 + _comboMultiplier));
+                }
+                else
+                {
+                    rb.AddExplosionForce(blastForce, transform.position, blastRadius);
                 }
             }
         }
