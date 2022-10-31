@@ -5842,6 +5842,7 @@ MonoBehaviour:
   player: {fileID: 1192921177}
   comboText: {fileID: 1062168377}
   comboWindowTime: 0.1
+  textScaleAmount: 1.2
 --- !u!1 &1199044579
 GameObject:
   m_ObjectHideFlags: 0

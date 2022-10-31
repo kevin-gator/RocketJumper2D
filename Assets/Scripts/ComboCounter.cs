@@ -10,6 +10,8 @@ public class ComboCounter : MonoBehaviour
     public float comboWindowTime = 0.1f; //Creates a brief grace period after the player hits the ground within which they can continue their combo if they hit another rocket jump within the window
     private float _comboTimer;
     private PlayerController _playerController;
+    private float _textScalingTime;
+    public float textScaleAmount = 1.2f;
 
     // Start is called before the first frame update
     private void Start()
@@ -18,7 +20,7 @@ public class ComboCounter : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
         if (!_playerController.IsGrounded() || _playerController.rampSliding) //If player is off the ground or rampsliding
         {
@@ -43,6 +45,19 @@ public class ComboCounter : MonoBehaviour
         {
             comboText.text = "COMBO\r\nx" + counter;
         }
+
+        if(_textScalingTime >= 0f)
+        {
+            _textScalingTime -= Time.deltaTime;
+        }
+        else
+        {
+            _textScalingTime = 0f;
+        }
+
+        float textScale = 1 + (_textScalingTime * textScaleAmount);
+
+        comboText.transform.localScale = new Vector3(textScale, textScale, textScale);
     }
 
     async public void AddCount()
@@ -50,6 +65,8 @@ public class ComboCounter : MonoBehaviour
         //Creates a 100 ms delay when triggered to solve issues with detecting a rocket jump when the player is grounded
         await Task.Delay(100);
         //Increased counter by 1
+        _textScalingTime = 0.1f;
+
         counter += 1;
         //Debug.Log(comboCounter);
     }
