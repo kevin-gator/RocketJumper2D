@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -9061840483907650890}
   - component: {fileID: -3899865396289186057}
   - component: {fileID: -1227886108920792908}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rocket
   m_TagString: NoKnockback
   m_Icon: {fileID: 0}

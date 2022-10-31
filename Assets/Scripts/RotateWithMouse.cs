@@ -17,11 +17,13 @@ public class RotateWithMouse : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        //Gets look direction relative to player position based on mouse position
         _lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         //lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        //Sets rotation to look angle
         transform.rotation = Quaternion.Euler(0f, 0f, _lookAngle);
 
-        if (_playerController.lookingRight)
+        if (_playerController.lookingRight) //Checks if the player controller is looking right or not and adjusts lookAngle accordingly
         {
             _lookAngle = val1 * Mathf.Rad2Deg + Mathf.Atan2(_lookDirection.x, -_lookDirection.y) * Mathf.Rad2Deg;
         }

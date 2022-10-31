@@ -7,7 +7,7 @@ public class MuzzleFlash : MonoBehaviour
     private Animator _mzAnimator;
     private float _mzTimer;
 
-    private readonly float _mzwaitTime = 0.23f;
+    private float _mzwaitTime = 0.23f;
 
     private void Start()
     {
