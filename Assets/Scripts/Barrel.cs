@@ -24,6 +24,15 @@ public class Barrel : MonoBehaviour
 
     private PlayerController _playerController;
 
+    public GameObject spine1;
+
+    //[SerializeField]
+    //private float adjustValue;
+    //public float adjustValueLookingRight = 0.95f;
+    //public float adjustValueLookingLeft = 1f;
+
+    //public float val1;
+
     private void Start()
     {
         _playerController = player.GetComponent<PlayerController>();
@@ -35,20 +44,21 @@ public class Barrel : MonoBehaviour
     private void Update()
     {
         //Gets look direction relative to player position from mouse position
-        _lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        //_lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         //Converts look direction to an angle
-        _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
+        //_lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
         //Sets the barrel rotation to the look angle
-        transform.rotation = Quaternion.Euler(0f, 0f, _lookAngle);
+        //transform.rotation = Quaternion.Euler(0f, 0f, _lookAngle * adjustValue);
 
-        /*if (lookDirection.x >= 0)
+        //Adjusts rotation based on look direction
+        if (_playerController.lookingRight)
         {
-        lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+            transform.rotation = spine1.transform.rotation * Quaternion.Euler(0, 0, -90);
         }
-        else if (lookDirection.x < 0)
+        else
         {
-            lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-        }*/
+            transform.rotation = Quaternion.Inverse(spine1.transform.rotation) * Quaternion.Euler(0, 0, -90);
+        }
 
         if (Input.GetMouseButton(0) && Time.time > _lastFireTime + fireRate) //Checks if mouse1 is being held down and accounts for firerate
         {
@@ -71,7 +81,7 @@ public class Barrel : MonoBehaviour
         _playerAnimator.SetTrigger("fireGun");
 
         /*
-        if (playerController.lookingRight)
+        if (_playerController.lookingRight)
         {
             firedBullet.GetComponent<Rigidbody2D>().velocity = barrelTip.right * fireSpeed;
         }
