@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     public float deceleration = 1f;
     public float velPower = 1f;
     public float frictionAmount = 1f;
-    public float rampSlideThreshold = 15f;
+    public float rampSlideThresholdY = 10f;
+    public float rampSlideThresholdX = 32f;
     public float gravity = -40f;
     public float raycastDistance = 0.5f;
     //public float coyoteTime = 0.2f;
@@ -44,6 +45,9 @@ public class PlayerController : MonoBehaviour
 
     public TMP_Text xVelCounter;
     public TMP_Text yVelCounter;
+    public TMP_Text totalVelCounter;
+
+    public float totalVelocity;
 
     // Start is called before the first frame update
     private void Start()
@@ -58,6 +62,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+        #region Calculating total velocity
+        totalVelocity = Mathf.Sqrt(rb.velocity.x * rb.velocity.x + rb.velocity.y * rb.velocity.y);
+        #endregion
+
         #region Sprite flipping based on look direction
         //Gets look direction relative to player position based on mouse location on screen
         lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -104,7 +112,7 @@ public class PlayerController : MonoBehaviour
         //Finally multiplies by sign to reapply direction
         float movement = Mathf.Pow(Mathf.Abs(speedDiff) * accelRate, velPower) * Mathf.Sign(speedDiff);
 
-        if (IsGrounded() && rb.velocity.y < rampSlideThreshold) //If player is grounded and their Y velocity is not greater than the rampslide threshold
+        if (IsGrounded() && rb.velocity.y < rampSlideThresholdY && rb.velocity.x < rampSlideThresholdX) //If player is grounded and not rampsliding
         {
             //Gets normal of the slope the player is standing on based on the raycast
             slopeNormal = _raycastHit.normal;
@@ -155,7 +163,7 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region Friction
-        if (rb.velocity.y > rampSlideThreshold) //If player Y velocity > ramp slide threshold
+        if (rb.velocity.y > rampSlideThresholdY && rb.velocity.x > rampSlideThresholdX) //If player Y & X velocity > ramp slide thresholds
         {
             //Do nothing (friction not applied)
         }
@@ -178,6 +186,7 @@ public class PlayerController : MonoBehaviour
         //Sets X and Y velocity UI to mirror player velocity
         xVelCounter.text = "xv:" + (int)Mathf.Abs(Mathf.RoundToInt(rb.velocity.x));
         yVelCounter.text = "yv:" + (int)Mathf.Abs(Mathf.RoundToInt(rb.velocity.y));
+        totalVelCounter.text = "v:" + (int)Mathf.RoundToInt(totalVelocity);
         #endregion
 
         #region Coyote Time (Removed)
