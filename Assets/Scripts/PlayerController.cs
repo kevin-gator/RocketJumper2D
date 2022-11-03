@@ -49,6 +49,9 @@ public class PlayerController : MonoBehaviour
 
     public float totalVelocity;
 
+    public GameObject spine_1;
+    private RotateWithMouse _rotateWithMouse;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -56,6 +59,7 @@ public class PlayerController : MonoBehaviour
         // cc = GetComponent<CapsuleCollider2D>();
         // colliderSize = cc.size;
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        _rotateWithMouse = spine_1.GetComponent<RotateWithMouse>();
 
     }
 
@@ -67,8 +71,7 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region Sprite flipping based on look direction
-        //Gets look direction relative to player position based on mouse location on screen
-        lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        lookDirection = _rotateWithMouse.lookDirection;
 
         //Flips player sprite based on look direction
         if (lookDirection.x >= 0)
@@ -112,7 +115,7 @@ public class PlayerController : MonoBehaviour
         //Finally multiplies by sign to reapply direction
         float movement = Mathf.Pow(Mathf.Abs(speedDiff) * accelRate, velPower) * Mathf.Sign(speedDiff);
 
-        if (IsGrounded() && rb.velocity.y < rampSlideThresholdY && rb.velocity.x < rampSlideThresholdX) //If player is grounded and not rampsliding
+        if (IsGrounded() && rb.velocity.y < rampSlideThresholdY) //If player is grounded and not rampsliding
         {
             //Gets normal of the slope the player is standing on based on the raycast
             slopeNormal = _raycastHit.normal;
@@ -163,7 +166,7 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region Friction
-        if (rb.velocity.y > rampSlideThresholdY && rb.velocity.x > rampSlideThresholdX) //If player Y & X velocity > ramp slide thresholds
+        if (rb.velocity.y > rampSlideThresholdY) //If player Y velocity > ramp slide thresholds
         {
             //Do nothing (friction not applied)
         }

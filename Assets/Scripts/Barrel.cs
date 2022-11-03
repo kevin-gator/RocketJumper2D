@@ -60,7 +60,7 @@ public class Barrel : MonoBehaviour
             transform.rotation = Quaternion.Inverse(spine1.transform.rotation) * Quaternion.Euler(0, 0, -90);
         }
 
-        if (Input.GetMouseButton(0) && Time.time > _lastFireTime + fireRate) //Checks if mouse1 is being held down and accounts for firerate
+        if (Input.GetMouseButton(0) && Time.time > _lastFireTime + fireRate && !Input.GetMouseButton(1)) //Checks if mouse1 is being held down and accounts for firerate
         {
             FireBullet();
             //Resets lastFireTime to current time

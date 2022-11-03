@@ -25,15 +25,6 @@ public class GrappleHook : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        /*
-        if (joint.distance > .5f)
-            joint.distance -= step;
-        else
-        {
-            line.enabled = false;
-            joint.enabled = false;
-
-        }*/
 
 
         if (Input.GetKeyDown(KeyCode.Mouse1))

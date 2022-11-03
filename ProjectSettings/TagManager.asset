@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NoExplode
   - NoKnockback
+  - NoGrapple
   layers:
   - Default
   - TransparentFX

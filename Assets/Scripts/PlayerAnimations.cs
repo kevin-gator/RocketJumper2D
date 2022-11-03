@@ -3,12 +3,12 @@ using UnityEngine;
 public class PlayerAnimations : MonoBehaviour
 {
 
-    public Vector2 lookDirection;
     public GameObject rpg;
     public Barrel rpgBarrel;
     private Animator _animator;
     private PlayerController _playerController;
     private Rigidbody2D _rb;
+    public GameObject spine_1;
 
     // Start is called before the first frame update
     private void Start()
@@ -17,8 +17,6 @@ public class PlayerAnimations : MonoBehaviour
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _animator = gameObject.GetComponent<Animator>();
         rpgBarrel = rpg.GetComponent<Barrel>();
-
-        lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
     }
 
     // Update is called once per frame
