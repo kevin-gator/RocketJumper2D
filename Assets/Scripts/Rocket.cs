@@ -3,7 +3,8 @@ using UnityEngine;
 public static class RigidBody2DExt
 {
     //I took this class from https://stackoverflow.com/questions/34250868/unity-addexplosionforce-to-2d, I have no idea how it works but it basically allows you to create a 2D ExplosionForce
-    public static void AddExplosionForce(this Rigidbody2D rb, float explosionForce, Vector2 explosionPosition, float explosionRadius, float upwardsModifier = 0.0F, ForceMode2D mode = ForceMode2D.Force)
+    public static void AddExplosionForce(this Rigidbody2D rb, float explosionForce, Vector2 explosionPosition,
+        float explosionRadius, float upwardsModifier = 0.0F, ForceMode2D mode = ForceMode2D.Force)
     {
         Vector2 explosionDir = rb.position - explosionPosition;
         float explosionDistance = explosionDir.magnitude / explosionRadius;
@@ -53,16 +54,20 @@ public class Rocket : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) //Triggers when the rocket hits something
     {
-        if (other.gameObject.tag != "NoExplode" && other.gameObject.layer != 3) //If the object it hits doesn't have the No Explode tag, trigger an explosion
+        //If the object it hits doesn't have the No Explode tag, trigger an explosion
+        if (other.gameObject.tag != "NoExplode" && other.gameObject.layer != 3)
         {
             Explode();
             //Debug.Log("Boom");
         }
-        else if(other.gameObject.tag == "NoExplode" && other.gameObject.layer != 3) //If the object has the No Explode tag and doesn't belong to the Player layer (layer 3), delete the rocket without triggering an explosion
+        //If the object has the No Explode tag and doesn't belong to the Player layer (layer 3), delete the rocket without triggering an explosion
+        else if (other.gameObject.tag == "NoExplode" && other.gameObject.layer != 3)
         {
             Destroy(gameObject);
         }
-        //Objects on the player layer will neither delete nor explode the rocket if they touch it -- the rocket will just pass right through them (note: the rocket is on the player layer, so this stops rockets from colliding with each other)
+        //Objects on the player layer will neither delete nor explode the rocket if they touch it
+        //-- the rocket will just pass right through them (note: the rocket is on the player layer,
+        //so this stops rockets from colliding with each other)
     }
 
     private void Explode()
@@ -77,7 +82,10 @@ public class Rocket : MonoBehaviour
         foreach(Collider2D nearbyObject in colliders) //Runs for each collider in the collider list
         {
             Rigidbody2D rb = nearbyObject.gameObject.GetComponent<Rigidbody2D>(); //Gets the rigidbody of the collider gameObject
-            if (rb != null && rb.gameObject.tag != "NoKnockback") //Checks to make sure there is a rigidbody and that the collider gameObject isn't tagged No Knockback (rockets are tagged this way, for example, to prevent explosions from moving them)
+
+            //Checks to make sure there is a rigidbody and that the collider gameObject isn't tagged No Knockback
+            //(rockets are tagged this way, for example, to prevent explosions from moving them)
+            if (rb != null && rb.gameObject.tag != "NoKnockback")
             {
                 //rb.AddExplosionForce(blastForce, transform.position, blastRadius);
                 if (rb.gameObject.layer == 3) //Checks if the collider gameObject is on the player layer
@@ -89,7 +97,8 @@ public class Rocket : MonoBehaviour
                     //Sets combo multiplier based on the combo speed bonus and the player's current combo count
                     _comboMultiplier = (float)comboCounter.counter * comboSpeedBonus;
                     //Adds explosion force using the blastForce float, and adjusted by the combo multiplier
-                    rb.AddExplosionForce(blastForce, transform.position, blastRadius * (1 + _comboMultiplier));
+                    rb.AddExplosionForce(blastForce, transform.position,
+                        blastRadius * (1 + _comboMultiplier));
                 }
                 else //If the collider gameObject is on any other layer
                 {

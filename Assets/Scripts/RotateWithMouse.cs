@@ -38,7 +38,8 @@ public class RotateWithMouse : MonoBehaviour
         //Sets rotation to look angle
         //transform.localRotation = Quaternion.Euler(0f, 0f, (_lookAngle - 90) * 0.95);
 
-        if (_playerController.lookingRight) //Checks if the player controller is looking right or not and adjusts lookAngle and localRotation accordingly
+        //Checks if the player controller is looking right or not and adjusts lookAngle and localRotation accordingly
+        if (_playerController.lookingRight)
         {
             _lookAngle = Mathf.Atan2(lookDirection.x, -lookDirection.y) * Mathf.Rad2Deg;
             transform.localRotation = Quaternion.Euler(0f, 0f, (_lookAngle - 90) * 0.95f);

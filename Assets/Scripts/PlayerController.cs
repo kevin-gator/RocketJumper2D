@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(movement * Vector2.right);
                 onSlope = false;
             }*/
-            
+
             // Adds movement forces to Y & X axes, multiplied by slope normals
             rb.AddForce(slopeNormal.y * (movement * Vector2.right));
             rb.AddForce(slopeNormal.x * (movement * Vector2.down));
@@ -208,13 +208,15 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded()
     {
-        //Returns true if the groundcheck GameObject at the player's feet is close enough to the ground, using groundLayer as a layermask to determine what layer contains level geometry
+        //Returns true if the groundcheck GameObject at the player's feet is close enough to the ground,
+        //using groundLayer as a layermask to determine what layer contains level geometry
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        // I don't really get how this works because it's using the new input system which I don't really understand, but it gets user input on the X axis somehow
+        // I don't really get how this works because it's using the new input system
+        // which I don't really understand, but it gets user input on the X axis somehow
         _input = context.ReadValue<Vector2>().x;
 
         if (context.started) //If player is pressing movement buttons, isMoving is true, otherwise false

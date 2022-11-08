@@ -7,7 +7,7 @@ public class ComboCounter : MonoBehaviour
     public int counter;
     public GameObject player;
     public TMP_Text comboText;
-    public float comboWindowTime = 0.1f; //Creates a brief grace period after the player hits the ground within which they can continue their combo if they hit another rocket jump within the window
+    public float comboWindowTime = 0.1f; // Time before combo drops after landing
     private float _comboTimer;
     private PlayerController _playerController;
     private float _textScalingTime;
@@ -46,7 +46,7 @@ public class ComboCounter : MonoBehaviour
             comboText.text = "COMBO\r\nx" + counter;
         }
 
-        if(_textScalingTime >= 0f)
+        if (_textScalingTime >= 0f)
         {
             _textScalingTime -= Time.deltaTime;
         }
@@ -55,7 +55,7 @@ public class ComboCounter : MonoBehaviour
             _textScalingTime = 0f;
         }
 
-        float textScale = 1 + (_textScalingTime * textScaleAmount);
+        float textScale = 1 + _textScalingTime * textScaleAmount;
 
         comboText.transform.localScale = new Vector3(textScale, textScale, textScale);
     }
