@@ -32,22 +32,23 @@ public class GrappleHook : MonoBehaviour
             _targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _targetPos.z = 0;
 
-            _hit = Physics2D.Raycast(transform.position, _targetPos - transform.position, distance, mask);
+            _hit = Physics2D.Raycast(transform.position, _targetPos
+                                                         - transform.position, distance, mask);
 
             if (_hit.collider != null && _hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
-
             {
                 Debug.Log("Hit");
                 _joint.enabled = true;
                 //	Debug.Log (hit.point - new Vector2(hit.collider.transform.position.x,hit.collider.transform.position.y);
-                Vector2 connectPoint = _hit.point - new Vector2(_hit.collider.transform.position.x, _hit.collider.transform.position.y);
+                Vector2 connectPoint =
+                    _hit.point - new Vector2(_hit.collider.transform.position.x, _hit.collider.transform.position.y);
                 connectPoint.x = connectPoint.x / _hit.collider.transform.localScale.x;
                 connectPoint.y = connectPoint.y / _hit.collider.transform.localScale.y;
                 Debug.Log(connectPoint);
                 _joint.connectedAnchor = connectPoint;
 
                 _joint.connectedBody = _hit.collider.gameObject.GetComponent<Rigidbody2D>();
-                //		joint.connectedAnchor = hit.point - new Vector2(hit.collider.transform.position.x,hit.collider.transform.position.y);
+                //joint.connectedAnchor = hit.point - new Vector2(hit.collider.transform.position.x,hit.collider.transform.position.y);
                 _joint.distance = Vector2.Distance(transform.position, _hit.point);
 
                 line.enabled = true;

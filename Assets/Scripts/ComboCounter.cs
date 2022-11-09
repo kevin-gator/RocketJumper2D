@@ -53,7 +53,7 @@ public class ComboCounter : MonoBehaviour
             comboText.text = "COMBO\r\nx" + counter;
         }
 
-        if(_textScalingTime >= 0f)
+        if (_textScalingTime >= 0f)
         {
             _textScalingTime -= Time.deltaTime;
         }
@@ -62,7 +62,7 @@ public class ComboCounter : MonoBehaviour
             _textScalingTime = 0f;
         }
 
-        float textScale = 1 + (_textScalingTime * textScaleAmount);
+        float textScale = 1 + _textScalingTime * textScaleAmount;
 
         comboText.transform.localScale = new Vector3(textScale, textScale, textScale);
 

@@ -45,7 +45,7 @@ public class PlayerAnimations : MonoBehaviour
             _animator.SetBool("isGrounded", false);
         }
 
-        if(_playerController.rampSliding)
+        if (_playerController.rampSliding)
         {
             _animator.SetBool("rampSliding", true);
         }
@@ -54,7 +54,7 @@ public class PlayerAnimations : MonoBehaviour
             _animator.SetBool("rampSliding", false);
         }
 
-        if(_playerController.isMoving)
+        if (_playerController.isMoving)
         {
             _animator.SetBool("isMoving", true);
         }
