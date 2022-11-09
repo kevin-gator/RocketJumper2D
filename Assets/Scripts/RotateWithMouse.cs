@@ -21,13 +21,16 @@ public class RotateWithMouse : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //Gets look direction relative to player position based on mouse position
+        //Gets look direction based on the difference between spine position and _lookPoint
         lookDirection = _lookPoint - transform.position;
 
+        //If RMB is not being held down
         if (!Input.GetMouseButton(1))
         {
+            //Sets _lookPoint to the mouse position
             _lookPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
+        //If RMB is not being held down
         else
         {
             SetLookPointToAnchor();
@@ -52,7 +55,9 @@ public class RotateWithMouse : MonoBehaviour
 
     async private void SetLookPointToAnchor()
     {
-        await Task.Delay(10);
+        //Tiny delay to avoid issues
+        await Task.Delay(1);
+        //Sets _lookPoint to the position of the fired grappling hook
         _lookPoint = GameObject.Find("grappleHook (Clone)").transform.position;
     }
 }

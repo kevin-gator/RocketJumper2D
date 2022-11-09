@@ -7,11 +7,18 @@ public class ComboCounter : MonoBehaviour
     public int counter;
     public GameObject player;
     public TMP_Text comboText;
+    public TMP_Text syncText;
     public float comboWindowTime = 0.1f; //Creates a brief grace period after the player hits the ground within which they can continue their combo if they hit another rocket jump within the window
     private float _comboTimer;
     private PlayerController _playerController;
     private float _textScalingTime;
     public float textScaleAmount = 1.2f;
+    public float rocketHits;
+    private float lastRocketHit;
+    public float syncWindowTime = 0.05f; //The window in which two rockets must explode by the player in order to register as a sync jump
+    private float syncTextDisplayValue;
+    public float syncTextDisplayTime = 2f;
+    private float syncTextTimer;
 
     // Start is called before the first frame update
     private void Start()
@@ -58,18 +65,56 @@ public class ComboCounter : MonoBehaviour
         float textScale = 1 + (_textScalingTime * textScaleAmount);
 
         comboText.transform.localScale = new Vector3(textScale, textScale, textScale);
+
+        //Sets sync text UI
+        if (rocketHits > 1)
+        {
+            syncTextDisplayValue = rocketHits;
+            syncTextTimer = syncTextDisplayTime;
+        }
+
+        if(syncTextDisplayValue > 1)
+        {
+            syncTextTimer -= Time.deltaTime;
+        }
+        else
+        {
+            syncTextTimer = 0f;
+        }
+
+        if(syncTextTimer > 0f)
+        {
+            syncText.text = "SYNC\r\nx" + syncTextDisplayValue;
+        }
+        else
+        {
+            syncText.text = "";
+            syncTextDisplayValue = 0f;
+        }
+
+        if (lastRocketHit > 0)
+        {
+            lastRocketHit -= Time.deltaTime;
+        }
+        else
+        {
+            rocketHits = 0;
+        }
+
+        syncText.transform.localScale = new Vector3(textScale, textScale, textScale);
     }
 
     async public void AddCount()
     {
         //Creates a 100 ms delay when triggered to solve issues with detecting a rocket jump when the player is grounded
         await Task.Delay(100);
-        //Increased counter by 1
         _textScalingTime = 0.1f;
-
+        //Increased counter by 1
         counter += 1;
-        //Debug.Log(comboCounter);
+        rocketHits += 1;
+        lastRocketHit = syncWindowTime;
     }
+
 
     /*public float GetCount()
     {

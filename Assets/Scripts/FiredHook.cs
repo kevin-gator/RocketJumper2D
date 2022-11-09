@@ -20,32 +20,38 @@ public class FiredHook : MonoBehaviour
 
     void Update()
     {
+        //Sets the second position of the line renderer to the position of the grappling hook
         _grapplingHookScript.line.SetPosition(1, transform.position);
-
+        //Sets the anchor point of the distance joint to the position of the grappling hook
         _grapplingHookScript.joint.connectedAnchor = transform.position;
-
+        //Calculates distance between the player and the grappling hook
         _grapplingHookScript.distanceFromPlayer = Vector3.Distance(_player.transform.position, transform.position);
-
+        //Gets the position of the grapple hook relative to the player as a Vector2
         _rotateDirection = _player.transform.position - transform.position;
-
+        //Converts the rotate direction to an angle in degrees
         _rotateAngle = Mathf.Atan2(_rotateDirection.x, -_rotateDirection.y) * Mathf.Rad2Deg;
-
+        //Rotates the grappling hook to face the player's current position
         transform.rotation = Quaternion.Euler(0, 0, _rotateAngle + 90);
-
+        //Destroys the grappling hook when RMB is released or the max fire distance is reached
         if (Input.GetKeyUp(KeyCode.Mouse1) || _grapplingHookScript.distanceFromPlayer > _grapplingHookScript.maxDistance)
         {
             Destroy(gameObject);
         }
     }
     
+    //Triggered when the grappling hook hits a collider
     public void OnTriggerEnter2D(Collider2D other)
     {
+        //If the collider gameObject is grappleable and not on the player layer
         if(other.gameObject.tag != "NoGrapple" && other.gameObject.layer != 3)
         {
+            //Stops the grappling hook movement
             _rb.velocity = Vector3.zero;
+            //Turns on the distance joint
             _grapplingHookScript.joint.enabled = true;
-            Debug.Log("Grappled!");
+            //Debug.Log("Grappled!");
         }
+        //If the collider gameObject is not grappleable and not on the player layer, destroy the grappling hook
         else if(other.gameObject.tag == "NoGrapple" && other.gameObject.layer != 3)
         {
             Destroy(gameObject);

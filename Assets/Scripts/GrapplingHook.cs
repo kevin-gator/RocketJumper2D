@@ -26,26 +26,29 @@ public class GrapplingHook : MonoBehaviour
     
     void Update()
     {
-
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        //If RMB is held down
+        if (Input.GetKeyDown(KeyCode.Mouse1)) 
         {
             FireHook();
             line.enabled = true;
         }
-
-        if(Input.GetKeyUp(KeyCode.Mouse1) || distanceFromPlayer > maxDistance)
+        //When RMB is released or when the max grapple distance is reached
+        if (Input.GetKeyUp(KeyCode.Mouse1) || distanceFromPlayer > maxDistance)
         {
             line.enabled = false;
             joint.enabled = false;
-            distanceFromPlayer = Vector3.Distance(barrelTip.position, transform.position);
+            //Resets max grapple distance
+            distanceFromPlayer = Vector3.Distance(barrelTip.position, transform.position); 
         }
-
-        line.SetPosition(0, barrelTip.position);
+        //Sets the first position of the line renderer to the barrel tip
+        line.SetPosition(0, barrelTip.position); 
     }
 
     private void FireHook()
     {
+        //Creates a copy of the grappleHook prefab
         GameObject firedGrappleHook = Instantiate(grappleHook, firePoint.position, barrelTip.rotation);
+        //Sets the grappleHook copy velocity
         firedGrappleHook.GetComponent<Rigidbody2D>().velocity = firePoint.right * fireSpeed;
     }
 }
