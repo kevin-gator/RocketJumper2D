@@ -19,6 +19,7 @@ public class ComboCounter : MonoBehaviour
     private float syncTextDisplayValue;
     public float syncTextDisplayTime = 2f;
     private float syncTextTimer;
+    public ScreenShake screenShake;
 
     // Start is called before the first frame update
     private void Start()
@@ -106,13 +107,14 @@ public class ComboCounter : MonoBehaviour
 
     async public void AddCount()
     {
-        //Creates a 100 ms delay when triggered to solve issues with detecting a rocket jump when the player is grounded
-        await Task.Delay(100);
+        //Creates a delay when triggered to solve issues with detecting a rocket jump when the player is grounded
+        await Task.Delay(1);
         _textScalingTime = 0.1f;
         //Increased counter by 1
         counter += 1;
         rocketHits += 1;
         lastRocketHit = syncWindowTime;
+        screenShake.Shake();
     }
 
 

@@ -27,6 +27,8 @@ public class PlayerAnimations : MonoBehaviour
 
         _animator.SetFloat("verticalMovement", _rb.velocity.y);
 
+        _animator.SetFloat("slopeAngle", Vector2.SignedAngle(_playerController.slopeNormal, Vector2.up));
+
         if (_playerController.lookingRight)
         {
             _animator.SetBool("lookingRight", true);
@@ -62,7 +64,6 @@ public class PlayerAnimations : MonoBehaviour
         {
             _animator.SetBool("isMoving", false);
         }
-
 
     }
 }

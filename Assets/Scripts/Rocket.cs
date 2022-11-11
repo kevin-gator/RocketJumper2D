@@ -37,9 +37,6 @@ public class Rocket : MonoBehaviour
     private float _comboMultiplier = 1f;
     public float comboSpeedBonus = 0f; //Adjust this value to add a change in explosion force based on the player's combo count
 
-    //public GameObject player = GameObject.Find("Player");
-    //private ComboCounter comboCounter;
-
     // Start is called before the first frame update
     private void Start()
     {

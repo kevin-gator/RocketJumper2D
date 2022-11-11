@@ -15,6 +15,7 @@ public class GrapplingHook : MonoBehaviour
     public float distanceFromPlayer = 0f;
     public float maxDistance = 50f;
 
+    public Animator playerAnimator;
     void Start()
     {
         line = GetComponent<LineRenderer>();
@@ -50,5 +51,7 @@ public class GrapplingHook : MonoBehaviour
         GameObject firedGrappleHook = Instantiate(grappleHook, firePoint.position, barrelTip.rotation);
         //Sets the grappleHook copy velocity
         firedGrappleHook.GetComponent<Rigidbody2D>().velocity = firePoint.right * fireSpeed;
+        //Triggers the "fireGun" trigger on the player's Animator component
+        playerAnimator.SetTrigger("fireGun");
     }
 }

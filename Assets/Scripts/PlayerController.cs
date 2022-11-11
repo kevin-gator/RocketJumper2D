@@ -5,7 +5,9 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public Transform groundCheck;
+    public Transform groundCheck1;
+    //public Transform groundCheck2;
+    //public Transform groundCheck3;
     public LayerMask groundLayer;
     public float speed = 8f;
     public float jumpingPower = 8f;
@@ -26,7 +28,7 @@ public class PlayerController : MonoBehaviour
     public bool onSlope;
 
     public Vector2 slopeNormal;
-    public float slopeAngle;
+    //public float slopeAngle;
 
     public CapsuleCollider2D cc;
     //private Vector2 colliderSize = cc.size;
@@ -35,7 +37,7 @@ public class PlayerController : MonoBehaviour
     public bool lookingRight;
     public bool rampSliding;
 
-    private float _input;
+    public float _input;
     private float _jumpBufferCounter;
     private RaycastHit2D _raycastHit;
 
@@ -51,6 +53,9 @@ public class PlayerController : MonoBehaviour
 
     public GameObject spine_1;
     private RotateWithMouse _rotateWithMouse;
+
+    public float onSlopeMovementModifier = 0.90909f;
+    public float slopeMovementModifier;
 
     // Start is called before the first frame update
     private void Start()
@@ -103,10 +108,19 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
 
+        if(IsGrounded())
+        {
+            grounded = true;
+        }
+        else
+        {
+            grounded = false;
+        }
+
         #region General horizontal movement & slope handling
         //The next 4 lines of movement code were taken from https://youtu.be/KbtcEVCM7bw
         //Calculates desired move direction and velocity
-        float targetSpeed = _input * speed;
+        float targetSpeed = _input * speed *slopeMovementModifier;
         //Calculates difference between current velocity and desired velocity
         float speedDiff = targetSpeed - rb.velocity.x;
         //Changes acceleration rate depending on situation
@@ -115,10 +129,14 @@ public class PlayerController : MonoBehaviour
         //Finally multiplies by sign to reapply direction
         float movement = Mathf.Pow(Mathf.Abs(speedDiff) * accelRate, velPower) * Mathf.Sign(speedDiff);
 
-        if (IsGrounded() && rb.velocity.y < rampSlideThresholdY) //If player is grounded and not rampsliding
+        //Gets normal of the slope the player is standing on based on the raycast
+        slopeNormal = _raycastHit.normal;
+
+        if (IsGrounded() /*&& Mathf.Abs(rb.velocity.y) < rampSlideThresholdY*/ && Mathf.Abs(rb.velocity.x) < rampSlideThresholdX) //If player is grounded and not rampsliding
         {
-            //Gets normal of the slope the player is standing on based on the raycast
-            slopeNormal = _raycastHit.normal;
+            
+
+            #region slopeAngle calculations (removed)
             //slopeAngle = Vector2.SignedAngle(slopeNormal, Vector2.up);
             /*
             if(slopeAngle != 0)
@@ -138,21 +156,27 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(movement * Vector2.right);
                 onSlope = false;
             }*/
+            #endregion
 
-            // Adds movement forces to Y & X axes, multiplied by slope normals
+            if(slopeNormal.y == 1)
+            {
+                slopeMovementModifier = 1f;
+            }
+            else if(slopeNormal.y != 1)
+            {
+                slopeMovementModifier = onSlopeMovementModifier;
+            }
+            
+            //Adds movement forces to Y & X axes, multiplied by slope normals
             rb.AddForce(slopeNormal.y * (movement * Vector2.right));
             rb.AddForce(slopeNormal.x * (movement * Vector2.down));
 
-            //Player is grounded and not rampsliding
-            grounded = true;
             rampSliding = false;
         }
         else //If the player is in the air or rampsliding
         {
             //Adds speed * input as a force to X axis (instead of using the movement value defined earlier)
             rb.AddForce(_input * speed * Vector2.right - Vector2.down * gravity);
-            //Player is grounded
-            grounded = false;
             //If player is grounded, they are rampsliding, otherwise they are not rampsliding
             if (IsGrounded())
             {
@@ -162,11 +186,12 @@ public class PlayerController : MonoBehaviour
             {
                 rampSliding = false;
             }
+            slopeMovementModifier = 1f;
         }
         #endregion
 
         #region Friction
-        if (rb.velocity.y > rampSlideThresholdY) //If player Y velocity > ramp slide thresholds
+        if (/*Mathf.Abs(rb.velocity.y) > rampSlideThresholdY &&*/ Mathf.Abs(rb.velocity.x) > rampSlideThresholdX) //If player Y velocity > ramp slide thresholds
         {
             //Do nothing (friction not applied)
         }
@@ -175,12 +200,18 @@ public class PlayerController : MonoBehaviour
             if (IsGrounded() && !isMoving) //Checks if player is both grounded and not pressing any horizontal movement buttons
             {
                 //This code was also taken from https://youtu.be/KbtcEVCM7bw
-                //Sets 'amount' to either current velocity or friction amount (whichever is smaller)
-                float amount = Mathf.Min(Mathf.Abs(rb.velocity.x), Mathf.Abs(frictionAmount));
+                //Sets amount to either current velocity or friction amount (whichever is smaller)
+                float amountX = Mathf.Min(Mathf.Abs(rb.velocity.x), Mathf.Abs(frictionAmount));
+                float amountY = Mathf.Min(Mathf.Abs(rb.velocity.y), Mathf.Abs(frictionAmount));
                 //Sets it to current movement direction
-                amount *= Mathf.Sign(rb.velocity.x);
+                amountX *= Mathf.Sign(rb.velocity.x);
+                amountY *= Mathf.Sign(rb.velocity.y);
                 //Applies as a force against movement direction
-                rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.right * -amountX, ForceMode2D.Impulse);
+                if (rb.velocity.y > 0)
+                {
+                    rb.AddForce(Vector2.up * -amountY, ForceMode2D.Impulse);
+                }
             }
         }
         #endregion
@@ -210,7 +241,14 @@ public class PlayerController : MonoBehaviour
     {
         //Returns true if the groundcheck GameObject at the player's feet is close enough to the ground,
         //using groundLayer as a layermask to determine what layer contains level geometry
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        if(Physics2D.OverlapCircle(groundCheck1.position, 0.2f, groundLayer)) //|| Physics2D.OverlapCircle(groundCheck2.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck3.position, 0.2f, groundLayer))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
