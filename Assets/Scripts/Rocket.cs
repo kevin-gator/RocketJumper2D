@@ -33,6 +33,7 @@ public class Rocket : MonoBehaviour
     public float blastRadius = 5f;
     public float blastForce = 700f;
     public GameObject explosion;
+    public GameObject explosionTrails;
 
     private float _comboMultiplier = 1f;
     public float comboSpeedBonus = 0f; //Adjust this value to add a change in explosion force based on the player's combo count
@@ -109,6 +110,8 @@ public class Rocket : MonoBehaviour
         GameObject explosionEffect = Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0));
         //Destroys the explosion effect after 0.2 seconds
         Destroy(explosionEffect, 0.2f);
+        //Instantiates a particle system for the explosion
+        GameObject explosionParticles = Instantiate(explosionTrails, transform.position, transform.rotation);
 
         //Destroys the rocket
         Destroy(gameObject);

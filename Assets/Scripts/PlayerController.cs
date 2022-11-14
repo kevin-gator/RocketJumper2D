@@ -108,7 +108,8 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
 
-        if(IsGrounded())
+        #region Setting Grounded Bool
+        if (IsGrounded())
         {
             grounded = true;
         }
@@ -116,6 +117,7 @@ public class PlayerController : MonoBehaviour
         {
             grounded = false;
         }
+        #endregion
 
         #region General horizontal movement & slope handling
         //The next 4 lines of movement code were taken from https://youtu.be/KbtcEVCM7bw
@@ -132,7 +134,7 @@ public class PlayerController : MonoBehaviour
         //Gets normal of the slope the player is standing on based on the raycast
         slopeNormal = _raycastHit.normal;
 
-        if (IsGrounded() /*&& Mathf.Abs(rb.velocity.y) < rampSlideThresholdY*/ && Mathf.Abs(rb.velocity.x) < rampSlideThresholdX) //If player is grounded and not rampsliding
+        if (IsGrounded() && (rb.velocity.y <= rampSlideThresholdY || Mathf.Abs(rb.velocity.x) <= rampSlideThresholdX)) //If player is grounded and not rampsliding
         {
             
 
@@ -177,8 +179,16 @@ public class PlayerController : MonoBehaviour
         {
             //Adds speed * input as a force to X axis (instead of using the movement value defined earlier)
             rb.AddForce(_input * speed * Vector2.right - Vector2.down * gravity);
-            //If player is grounded, they are rampsliding, otherwise they are not rampsliding
-            if (IsGrounded())
+
+            slopeMovementModifier = 1f;
+        }
+        #endregion
+
+        #region Friction
+        if (rb.velocity.y > rampSlideThresholdY && Mathf.Abs(rb.velocity.x) > rampSlideThresholdX) //If player velocity > ramp slide thresholds
+        {
+            //Do nothing (friction not applied)
+            if(IsGrounded())
             {
                 rampSliding = true;
             }
@@ -186,16 +196,9 @@ public class PlayerController : MonoBehaviour
             {
                 rampSliding = false;
             }
-            slopeMovementModifier = 1f;
+            
         }
-        #endregion
-
-        #region Friction
-        if (/*Mathf.Abs(rb.velocity.y) > rampSlideThresholdY &&*/ Mathf.Abs(rb.velocity.x) > rampSlideThresholdX) //If player Y velocity > ramp slide thresholds
-        {
-            //Do nothing (friction not applied)
-        }
-        else
+        else if(rb.velocity.y <= rampSlideThresholdY || Mathf.Abs(rb.velocity.x) <= rampSlideThresholdX)
         {
             if (IsGrounded() && !isMoving) //Checks if player is both grounded and not pressing any horizontal movement buttons
             {
@@ -213,6 +216,7 @@ public class PlayerController : MonoBehaviour
                     rb.AddForce(Vector2.up * -amountY, ForceMode2D.Impulse);
                 }
             }
+            rampSliding = false;
         }
         #endregion
 

@@ -31,11 +31,11 @@ public class ScreenShake : MonoBehaviour
         
         if(_screenShakeTimer > _screenShakeTime / 2)
         {
-            _virtualCamera.m_Lens.OrthographicSize -= _screenShakeIntensity * Time.deltaTime;
+            _virtualCamera.m_Lens.OrthographicSize *= 1 - (_screenShakeIntensity * Time.deltaTime);
         }
         else if(_screenShakeTimer > 0)
         {
-            _virtualCamera.m_Lens.OrthographicSize += _screenShakeIntensity * Time.deltaTime;
+            _virtualCamera.m_Lens.OrthographicSize *= 1 + (_screenShakeIntensity * Time.deltaTime);
         }
         else
         {
