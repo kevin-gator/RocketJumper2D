@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     public bool lookingRight;
     public bool rampSliding;
 
-    public float _input;
+    private float _input;
     private float _jumpBufferCounter;
     private RaycastHit2D _raycastHit;
 
@@ -56,6 +56,9 @@ public class PlayerController : MonoBehaviour
 
     public float onSlopeMovementModifier = 0.90909f;
     public float slopeMovementModifier;
+    
+    private float _dampingMultiplier = 1f;
+    public float dampingAmount;
 
     // Start is called before the first frame update
     private void Start()
@@ -122,7 +125,7 @@ public class PlayerController : MonoBehaviour
         #region General horizontal movement & slope handling
         //The next 4 lines of movement code were taken from https://youtu.be/KbtcEVCM7bw
         //Calculates desired move direction and velocity
-        float targetSpeed = _input * speed *slopeMovementModifier;
+        float targetSpeed = _input * speed * slopeMovementModifier;
         //Calculates difference between current velocity and desired velocity
         float speedDiff = targetSpeed - rb.velocity.x;
         //Changes acceleration rate depending on situation
@@ -178,9 +181,37 @@ public class PlayerController : MonoBehaviour
         else //If the player is in the air or rampsliding
         {
             //Adds speed * input as a force to X axis (instead of using the movement value defined earlier)
-            rb.AddForce(_input * speed * Vector2.right - Vector2.down * gravity);
+            rb.AddForce(_input * speed * _dampingMultiplier * Vector2.right - Vector2.down * gravity);
 
             slopeMovementModifier = 1f;
+        }
+        #endregion
+
+        #region In-Air Damping
+        if(!IsGrounded() || (rb.velocity.y > rampSlideThresholdY && Mathf.Abs(rb.velocity.x) > rampSlideThresholdX))
+        {
+            if(rb.velocity.x > 0)
+            {
+                if(_input < 0)
+                {
+                    _dampingMultiplier = 1f + dampingAmount;
+                }
+                else
+                {
+                    _dampingMultiplier = 1f;
+                }
+            }
+            else if(rb.velocity.x < 0)
+            {
+                if (_input > 0)
+                {
+                    _dampingMultiplier = 1f + dampingAmount;
+                }
+                else
+                {
+                    _dampingMultiplier = 1f;
+                }
+            }
         }
         #endregion
 

@@ -26,6 +26,8 @@ public class Barrel : MonoBehaviour
 
     public GameObject spine1;
 
+    public ParticleSystem muzzleSmoke;
+
     //[SerializeField]
     //private float adjustValue;
     //public float adjustValueLookingRight = 0.95f;
@@ -68,6 +70,7 @@ public class Barrel : MonoBehaviour
             _lastFireTime = Time.time;
             //Calls a function in the muzzleFlashScript
             _muzzleFlashScript.ActivateMuzzleFlash();
+            muzzleSmoke.Play();
         }
     }
 
