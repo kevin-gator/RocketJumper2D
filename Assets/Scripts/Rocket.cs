@@ -38,6 +38,8 @@ public class Rocket : MonoBehaviour
     private float _comboMultiplier = 1f;
     public float comboSpeedBonus = 0f; //Adjust this value to add a change in explosion force based on the player's combo count
 
+    private float _numHits;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -47,16 +49,18 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-
+        if(_numHits > 0) //If there are any hits, explode
+        {
+            Explode();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) //Triggers when the rocket hits something
     {
-        //If the object it hits doesn't have the No Explode tag, trigger an explosion
+        //If the object it hits doesn't have the No Explode tag, register a hit
         if (other.gameObject.tag != "NoExplode" && other.gameObject.layer != 3)
         {
-            Explode();
-            //Debug.Log("Boom");
+            _numHits += 1;
         }
         //If the object has the No Explode tag and doesn't belong to the Player layer (layer 3), delete the rocket without triggering an explosion
         else if (other.gameObject.tag == "NoExplode" && other.gameObject.layer != 3)
