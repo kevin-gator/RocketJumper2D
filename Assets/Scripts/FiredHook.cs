@@ -42,8 +42,10 @@ public class FiredHook : MonoBehaviour
     //Triggered when the grappling hook hits a collider
     public void OnTriggerEnter2D(Collider2D other)
     {
+        Material_Grappleable grappleable = other.gameObject.GetComponent<Material_Grappleable>();
+
         //If the collider gameObject is grappleable and not on the player layer
-        if(other.gameObject.tag != "NoGrapple" && other.gameObject.layer != 3)
+        if (grappleable != null && other.gameObject.layer != 3)
         {
             //Stops the grappling hook movement
             _rb.velocity = Vector3.zero;
@@ -51,9 +53,10 @@ public class FiredHook : MonoBehaviour
             _grapplingHookScript.joint.enabled = true;
             //Debug.Log("Grappled!");
         }
-        //If the collider gameObject is not grappleable and not on the player layer, destroy the grappling hook
-        else if(other.gameObject.tag == "NoGrapple" && other.gameObject.layer != 3)
+        //If the collider gameObject is not grappleable and not on the player layer, destroy the grappling hook and line renderer
+        else if(other.gameObject.layer != 3)
         {
+            _grapplingHookScript.line.enabled = false;
             Destroy(gameObject);
         }
     }

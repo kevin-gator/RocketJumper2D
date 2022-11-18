@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     //public Transform groundCheck3;
     public LayerMask groundLayer;
     public float speed = 8f;
+    public float jumpSpeed;
     public float jumpingPower = 8f;
     public float acceleration = 1f;
     public float deceleration = 1f;
@@ -181,7 +182,7 @@ public class PlayerController : MonoBehaviour
         else //If the player is in the air or rampsliding
         {
             //Adds speed * input as a force to X axis (instead of using the movement value defined earlier)
-            rb.AddForce(_input * speed * _dampingMultiplier * Vector2.right - Vector2.down * gravity);
+            rb.AddForce(_input * jumpSpeed * _dampingMultiplier * Vector2.right - Vector2.down * gravity);
 
             slopeMovementModifier = 1f;
         }
@@ -190,7 +191,7 @@ public class PlayerController : MonoBehaviour
         #region In-Air Damping
         if(!IsGrounded() || (rb.velocity.y > rampSlideThresholdY && Mathf.Abs(rb.velocity.x) > rampSlideThresholdX))
         {
-            if(rb.velocity.x > 0)
+            if(rb.velocity.x > 1)
             {
                 if(_input < 0)
                 {
@@ -201,7 +202,7 @@ public class PlayerController : MonoBehaviour
                     _dampingMultiplier = 1f;
                 }
             }
-            else if(rb.velocity.x < 0)
+            else if(rb.velocity.x < -1)
             {
                 if (_input > 0)
                 {

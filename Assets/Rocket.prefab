@@ -148,11 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79e101f6d7534c4cb25329a9f6419f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blastRadius: 10
-  blastForce: 200
+  blastRadius: 15
+  blastForce: 100
   explosion: {fileID: 3229797619456211106, guid: 184b590b715b8444ca65a93ac9e6d85a, type: 3}
   explosionTrails: {fileID: 3093060585636521776, guid: 01937ca0e83488447828693567b5dbe6, type: 3}
-  comboSpeedBonus: 0
+  comboSpeedBonus: 0.1
 --- !u!95 &-3899865396289186057
 Animator:
   serializedVersion: 4

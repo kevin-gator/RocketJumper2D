@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - NoExplode
   - NoKnockback
   - NoGrapple
+  - NoExplode
   layers:
   - Default
   - TransparentFX
