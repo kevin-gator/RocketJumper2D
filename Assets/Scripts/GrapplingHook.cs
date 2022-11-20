@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class GrapplingHook : MonoBehaviour
@@ -16,6 +17,7 @@ public class GrapplingHook : MonoBehaviour
     public float maxDistance = 50f;
 
     public Animator playerAnimator;
+
     void Start()
     {
         line = GetComponent<LineRenderer>();
@@ -45,8 +47,9 @@ public class GrapplingHook : MonoBehaviour
         line.SetPosition(0, barrelTip.position); 
     }
 
-    private void FireHook()
+    async private void FireHook()
     {
+        await Task.Delay(1);
         //Creates a copy of the grappleHook prefab
         GameObject firedGrappleHook = Instantiate(grappleHook, firePoint.position, barrelTip.rotation);
         //Sets the grappleHook copy velocity

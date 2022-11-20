@@ -10,6 +10,9 @@ public class RotateWithMouse : MonoBehaviour
     public Vector2 lookDirection;
     private PlayerController _playerController;
     private Vector3 _lookPoint;
+    public float aimAssistAmount;
+    public LayerMask grappleLayer;
+    public bool aimingAtGrapplePoint;
 
 
     // Start is called before the first frame update
@@ -30,9 +33,10 @@ public class RotateWithMouse : MonoBehaviour
             //Sets _lookPoint to the mouse position
             _lookPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
-        //If RMB is not being held down
+        //If RMB is being held down
         else
         {
+            AimAssist();
             SetLookPointToAnchor();
         }
 
@@ -52,12 +56,33 @@ public class RotateWithMouse : MonoBehaviour
             _lookAngle = Mathf.Atan2(-lookDirection.x, -lookDirection.y) * Mathf.Rad2Deg;
             transform.localRotation = Quaternion.Euler(0f, 0f, (_lookAngle - 90) * 1.05f);
         }
+        if (Physics2D.OverlapCircle(Camera.main.ScreenToWorldPoint(Input.mousePosition), aimAssistAmount, grappleLayer))
+        {
+            aimingAtGrapplePoint = true;
+        }
+        else
+        {
+            aimingAtGrapplePoint = false;
+        }
     }
 
+    private void AimAssist()
+    {
+        RaycastHit2D hit = Physics2D.CircleCast(Camera.main.ScreenToWorldPoint(Input.mousePosition), aimAssistAmount, Vector2.zero, Mathf.Infinity, grappleLayer);
+        if (aimingAtGrapplePoint == true)
+        {
+            _lookPoint = hit.point;
+        }
+        else
+        {
+            _lookPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+    }
+    
     async private void SetLookPointToAnchor()
     {
         //Tiny delay to avoid issues
-        await Task.Delay(1);
+        await Task.Delay(2);
         //Sets _lookPoint to the position of the fired grappling hook
         _lookPoint = GameObject.Find("grappleHook (Clone)").transform.position;
     }
