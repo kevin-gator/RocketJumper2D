@@ -1673,7 +1673,7 @@ GameObject:
   - component: {fileID: 112291294}
   - component: {fileID: 112291293}
   - component: {fileID: 112291292}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (62)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -1972,7 +1972,7 @@ GameObject:
   - component: {fileID: 119608947}
   - component: {fileID: 119608946}
   - component: {fileID: 119608945}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (74)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -5927,7 +5927,7 @@ GameObject:
   m_Component:
   - component: {fileID: 318630924}
   - component: {fileID: 318630923}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7629,7 +7629,7 @@ GameObject:
   - component: {fileID: 382555203}
   - component: {fileID: 382555202}
   - component: {fileID: 382555201}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (106)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -9246,7 +9246,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439910920}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3296.54, y: 548.33997, z: 0}
+  m_LocalPosition: {x: 3296.54, y: 538.33997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9677,7 +9677,7 @@ GameObject:
   - component: {fileID: 472238030}
   - component: {fileID: 472238029}
   - component: {fileID: 472238028}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (51)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -10488,7 +10488,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.25, y: -12.92, z: -10}
+  m_LocalPosition: {x: -13.01, y: -13.81, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12148,7 +12148,7 @@ GameObject:
   - component: {fileID: 594844298}
   - component: {fileID: 594844297}
   - component: {fileID: 594844296}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (110)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -12377,7 +12377,7 @@ GameObject:
   - component: {fileID: 596458549}
   - component: {fileID: 596458548}
   - component: {fileID: 596458547}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (104)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -12615,7 +12615,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600052187}
-  m_LocalRotation: {x: -0.000000057096038, y: -0.00000011645248, z: -0.42126775, w: 0.90693635}
+  m_LocalRotation: {x: -0.000000057095935, y: -0.00000011645253, z: -0.421267, w: 0.9069367}
   m_LocalPosition: {x: 0.91, y: 0.00000013669323, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13564,7 +13564,7 @@ GameObject:
   - component: {fileID: 679947422}
   - component: {fileID: 679947421}
   - component: {fileID: 679947420}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (50)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -14110,7 +14110,7 @@ GameObject:
   - component: {fileID: 715334279}
   - component: {fileID: 715334278}
   - component: {fileID: 715334277}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (66)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -24206,8 +24206,8 @@ MonoBehaviour:
   - {fileID: 16923299}
   - {fileID: 1472710590}
   m_Bounds:
-    m_Center: {x: -0.89490914, y: -0.019033313, z: 0.00000007720885}
-    m_Extent: {x: 3.171581, y: 1.9990343, z: 0.00000013312595}
+    m_Center: {x: -0.89490914, y: -0.01903379, z: 0.00000007720885}
+    m_Extent: {x: 3.171581, y: 1.9990338, z: 0.00000013312595}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -24271,7 +24271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192921177}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.25, y: -12.92, z: 0}
+  m_LocalPosition: {x: -13.01, y: -13.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24767,8 +24767,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -37.13925, y: 5.0803895}
       - {x: -34.139893, y: 15.079502}
-      - {x: 216.8601, y: 15.079502}
-      - {x: 196.86005, y: 3.0804977}
+      - {x: 181.8601, y: 15.079502}
+      - {x: 178.85962, y: 1.0801066}
       - {x: 90.860146, y: -10.919499}
       - {x: 15.8602, y: -4.919507}
       - {x: -36.64447, y: 4.987034}
@@ -24808,7 +24808,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 0
-    - position: {x: 216.8601, y: 15.080002, z: 0}
+    - position: {x: 181.8601, y: 15.080002, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -24818,7 +24818,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 0
-    - position: {x: 196.8601, y: 3.0800018, z: 0}
+    - position: {x: 178.8601, y: 1.0800018, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -24920,8 +24920,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 89.87596, y: 2.1112118, z: 0}
-    m_Extent: {x: 127.32715, y: 13.311792, z: 0}
+    m_Center: {x: 72.352875, y: 2.094903, z: 0}
+    m_Extent: {x: 109.80406, y: 13.296387, z: 0}
 --- !u!4 &1197787114
 Transform:
   m_ObjectHideFlags: 0
@@ -27267,7 +27267,7 @@ GameObject:
   - component: {fileID: 1321713036}
   - component: {fileID: 1321713035}
   - component: {fileID: 1321713034}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (91)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -28453,6 +28453,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookDirection: {x: 0, y: 0}
+  aimAssistAmount: 20
+  grappleLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  aimingAtGrapplePoint: 0
+  aimAdjustAmount: 1.8
 --- !u!1 &1394319414
 GameObject:
   m_ObjectHideFlags: 0
@@ -29627,7 +29633,7 @@ GameObject:
   - component: {fileID: 1398344870}
   - component: {fileID: 1398344869}
   - component: {fileID: 1398344868}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (47)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -31206,7 +31212,7 @@ GameObject:
   - component: {fileID: 1472416100}
   - component: {fileID: 1472416099}
   - component: {fileID: 1472416098}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (58)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -36295,7 +36301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761328881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.25, y: -12.92, z: -10}
+  m_LocalPosition: {x: -13.01, y: -13.81, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -39350,7 +39356,7 @@ GameObject:
   - component: {fileID: 2007471581}
   - component: {fileID: 2007471580}
   - component: {fileID: 2007471579}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (68)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -41175,7 +41181,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058895864}
-  m_LocalRotation: {x: 0, y: 0, z: -0.8677202, w: 0.49705303}
+  m_LocalRotation: {x: 0, y: 0, z: -0.86772037, w: 0.49705276}
   m_LocalPosition: {x: -0.12, y: -0.20117523, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -41408,7 +41414,7 @@ GameObject:
   - component: {fileID: 2091404303}
   - component: {fileID: 2091404302}
   - component: {fileID: 2091404301}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Closed Sprite Shape (80)
   m_TagString: NoExplode
   m_Icon: {fileID: 0}
@@ -42023,10 +42029,10 @@ PolygonCollider2D:
       - {x: 23.599892, y: 12.500456}
       - {x: 9.5996065, y: -29.500095}
       - {x: 17.599607, y: -70.50009}
-      - {x: 53.60006, y: -99.500496}
-      - {x: 93.599594, y: -102.50046}
-      - {x: 93.599594, y: -105.49946}
-      - {x: 53.600395, y: -102.4996}
+      - {x: 54.59978, y: -100.50039}
+      - {x: 73.599106, y: -101.50047}
+      - {x: 73.599594, y: -103.49997}
+      - {x: 53.600094, y: -102.49999}
       - {x: 14.600395, y: -73.4996}
       - {x: 5.6005707, y: -28.50016}
       - {x: 20.60057, y: 15.499833}
@@ -42091,7 +42097,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 53.600098, y: -99.5, z: 0}
+    - position: {x: 54.600098, y: -100.5, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -42101,7 +42107,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 93.6001, y: -102.5, z: 0}
+    - position: {x: 73.6001, y: -101.5, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -42110,8 +42116,8 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-      m_CornerMode: 1
-    - position: {x: 93.6001, y: -105.5, z: 0}
+      m_CornerMode: 2
+    - position: {x: 73.6001, y: -103.5, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -42120,7 +42126,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-      m_CornerMode: 1
+      m_CornerMode: 2
     - position: {x: 53.600098, y: -102.5, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
@@ -42263,8 +42269,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 59.566463, y: -37.970833, z: 0}
-    m_Extent: {x: 54.28366, y: 67.798615, z: 0}
+    m_Center: {x: 59.566463, y: -36.967453, z: 0}
+    m_Extent: {x: 54.28366, y: 66.79524, z: 0}
 --- !u!4 &2111099295
 Transform:
   m_ObjectHideFlags: 0
@@ -43422,7 +43428,7 @@ PolygonCollider2D:
       - {x: 1135.5, y: 292.6}
       - {x: 1131.611, y: 281.45184}
       - {x: 1120.5, y: 249.6}
-      - {x: 1103.5, y: 236.6}
+      - {x: 1105.5, y: 240.6}
       - {x: 1085.5, y: 236.6}
       - {x: 1075.5, y: 242.6}
       - {x: 1065.5, y: 240.6}
@@ -43610,16 +43616,16 @@ PolygonCollider2D:
       - {x: 1455.5, y: 250.6}
       - {x: 1605.5, y: 250.6}
       - {x: 1605.5, y: 251.6}
-      - {x: 1625.5, y: 254.6}
-      - {x: 1626.5, y: 252.6}
+      - {x: 1625.5, y: 258.6}
+      - {x: 1625.5, y: 255.6}
       - {x: 1620.5, y: 248.6}
       - {x: 1624.5, y: 242.6}
       - {x: 1621.5, y: 232.6}
       - {x: 1675.5, y: 222.6}
       - {x: 1749.5, y: 216.6}
-      - {x: 1855.5, y: 230.6}
-      - {x: 1875.5, y: 242.6}
-      - {x: 1877.5, y: 249.6}
+      - {x: 1837.5, y: 228.6}
+      - {x: 1840.5, y: 242.6}
+      - {x: 1873.5, y: 251.6}
       - {x: 1889.7146, y: 246.79636}
       - {x: 1894.5, y: 236.6}
       - {x: 1915.5, y: 232.6}
@@ -43787,12 +43793,13 @@ PolygonCollider2D:
       - {x: 3385.5005, y: 531.80975}
       - {x: 3385.5, y: 551.6}
       - {x: 3395.5, y: 551.6}
-      - {x: 3395.5, y: 537.6}
-      - {x: 3418.3032, y: 537.6001}
-      - {x: 3525.5, y: 537.6}
-      - {x: 3525.5005, y: 543.91473}
-      - {x: 3525.4998, y: 553.8026}
-      - {x: 3525.5, y: 564.2666}
+      - {x: 3395.4995, y: 545.3777}
+      - {x: 3395.5, y: 527.6}
+      - {x: 3525.5, y: 527.6}
+      - {x: 3525.5005, y: 535.66876}
+      - {x: 3525.4998, y: 548.30334}
+      - {x: 3525.5002, y: 557.40796}
+      - {x: 3525.5005, y: 565.53125}
       - {x: 3525.5, y: 573.6}
       - {x: 3545.5, y: 573.6}
       - {x: 3545.5, y: 571.6}
@@ -43995,8 +44002,8 @@ PolygonCollider2D:
       - {x: 4100.2285, y: 579.392}
       - {x: 4118.659, y: 565.68677}
       - {x: 4125.5, y: 560.6}
-      - {x: 4165.5, y: 557.6}
-      - {x: 4165.5, y: 562.6}
+      - {x: 4145.5, y: 559.6}
+      - {x: 4145.5, y: 562.6}
       - {x: 4185.5, y: 562.6}
       - {x: 4185.5005, y: 553.4788}
       - {x: 4185.4995, y: 549.11847}
@@ -46285,7 +46292,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1103.5, y: 236.6, z: 0}
+    - position: {x: 1105.5, y: 240.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -47905,7 +47912,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1625.5, y: 254.6, z: 0}
+    - position: {x: 1625.5, y: 258.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -47915,7 +47922,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1626.5, y: 252.6, z: 0}
+    - position: {x: 1625.5, y: 255.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -47975,7 +47982,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1855.5, y: 230.6, z: 0}
+    - position: {x: 1837.5, y: 228.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -47985,7 +47992,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1875.5, y: 242.6, z: 0}
+    - position: {x: 1840.5, y: 242.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -47995,7 +48002,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1877.5, y: 249.6, z: 0}
+    - position: {x: 1873.5, y: 251.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -48895,7 +48902,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 3395.5, y: 537.6, z: 0}
+    - position: {x: 3395.5, y: 527.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -48905,7 +48912,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 3525.5, y: 537.6, z: 0}
+    - position: {x: 3525.5, y: 527.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -49525,7 +49532,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 4165.5, y: 557.6, z: 0}
+    - position: {x: 4145.5, y: 559.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -49535,7 +49542,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 4165.5, y: 562.6, z: 0}
+    - position: {x: 4145.5, y: 562.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0

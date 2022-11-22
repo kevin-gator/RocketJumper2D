@@ -13,6 +13,8 @@ public class RotateWithMouse : MonoBehaviour
     public float aimAssistAmount;
     public LayerMask grappleLayer;
     public bool aimingAtGrapplePoint;
+    public float aimAdjustAmount;
+    private bool _useAimAssist;
 
 
     // Start is called before the first frame update
@@ -25,7 +27,7 @@ public class RotateWithMouse : MonoBehaviour
     private void Update()
     {
         //Gets look direction based on the difference between spine position and _lookPoint
-        lookDirection = _lookPoint - transform.position;
+        lookDirection = _lookPoint - transform.position + new Vector3(aimAdjustAmount, 0, 0);
 
         //If RMB is not being held down
         if (!Input.GetMouseButton(1))
@@ -49,12 +51,12 @@ public class RotateWithMouse : MonoBehaviour
         if (_playerController.lookingRight)
         {
             _lookAngle = Mathf.Atan2(lookDirection.x, -lookDirection.y) * Mathf.Rad2Deg;
-            transform.localRotation = Quaternion.Euler(0f, 0f, (_lookAngle - 90) * 0.95f);
+            transform.localRotation = Quaternion.Euler(0f, 0f, _lookAngle - 90);
         }
         else
         {
             _lookAngle = Mathf.Atan2(-lookDirection.x, -lookDirection.y) * Mathf.Rad2Deg;
-            transform.localRotation = Quaternion.Euler(0f, 0f, (_lookAngle - 90) * 1.05f);
+            transform.localRotation = Quaternion.Euler(0f, 0f, _lookAngle - 90);
         }
         if (Physics2D.OverlapCircle(Camera.main.ScreenToWorldPoint(Input.mousePosition), aimAssistAmount, grappleLayer))
         {
@@ -64,18 +66,45 @@ public class RotateWithMouse : MonoBehaviour
         {
             aimingAtGrapplePoint = false;
         }
+
+        Vector2 aimLineEndPoint = lookDirection.normalized * 1000;
+
+
+        RaycastHit2D aimRay = Physics2D.Raycast(transform.position, aimLineEndPoint, Mathf.Infinity, grappleLayer);
+
+        if(aimRay.collider != null)
+        {
+            _useAimAssist = false;
+        }
+        else
+        {
+            _useAimAssist = true;
+        }
+        Color hue;
+        if(_useAimAssist == true)
+        {
+            hue = Color.green;
+        }
+        else
+        {
+            hue = Color.red;
+        }
+        Debug.DrawRay(transform.position, aimLineEndPoint, hue);
     }
 
     private void AimAssist()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(Camera.main.ScreenToWorldPoint(Input.mousePosition), aimAssistAmount, Vector2.zero, Mathf.Infinity, grappleLayer);
-        if (aimingAtGrapplePoint == true)
+        if (_useAimAssist == true)
         {
-            _lookPoint = hit.point;
-        }
-        else
-        {
-            _lookPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.CircleCast(Camera.main.ScreenToWorldPoint(Input.mousePosition), aimAssistAmount, Vector2.zero, Mathf.Infinity, grappleLayer);
+            if (aimingAtGrapplePoint == true)
+            {
+                _lookPoint = hit.point;
+            }
+            else
+            {
+                _lookPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
         }
     }
     
@@ -85,5 +114,6 @@ public class RotateWithMouse : MonoBehaviour
         await Task.Delay(2);
         //Sets _lookPoint to the position of the fired grappling hook
         _lookPoint = GameObject.Find("grappleHook (Clone)").transform.position;
+        _useAimAssist = false;
     }
 }

@@ -23,11 +23,18 @@ public class TutorialTextTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        tutorialText.text = textToDisplay;
+        if (collision.gameObject.name == "Player")
+        {
+            tutorialText.text = textToDisplay;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        tutorialText.text = "";
+        if (collision.gameObject.name == "Player")
+        {
+            tutorialText.text = "";
+        }
+
     }
 }
