@@ -44222,7 +44222,7 @@ PolygonCollider2D:
       - {x: 1135.5, y: 292.6}
       - {x: 1131.611, y: 281.45184}
       - {x: 1120.5, y: 249.6}
-      - {x: 1105.5, y: 240.6}
+      - {x: 1104.7815, y: 241.13881}
       - {x: 1085.5, y: 236.6}
       - {x: 1075.5, y: 242.6}
       - {x: 1065.5, y: 240.6}
@@ -47086,7 +47086,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1105.5, y: 240.6, z: 0}
+    - position: {x: 1104.7815, y: 241.13881, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
