@@ -44403,9 +44403,9 @@ PolygonCollider2D:
       - {x: 1267.5, y: 240.6}
       - {x: 1265.5, y: 237.6}
       - {x: 1265.5, y: 222.6}
-      - {x: 1425.5, y: 222.6}
-      - {x: 1435.5, y: 237.6}
-      - {x: 1441.5, y: 252.6}
+      - {x: 1405.7672, y: 222.26555}
+      - {x: 1425.95, y: 237.76724}
+      - {x: 1435, y: 252.6}
       - {x: 1455.5, y: 252.6}
       - {x: 1455.5, y: 250.6}
       - {x: 1605.5, y: 250.6}
@@ -44417,8 +44417,8 @@ PolygonCollider2D:
       - {x: 1621.5, y: 232.6}
       - {x: 1675.5, y: 222.6}
       - {x: 1749.5, y: 216.6}
-      - {x: 1837.5, y: 228.6}
-      - {x: 1840.5, y: 242.6}
+      - {x: 1809, y: 224}
+      - {x: 1831, y: 242.6}
       - {x: 1873.5, y: 251.6}
       - {x: 1889.7146, y: 246.79636}
       - {x: 1894.5, y: 236.6}
@@ -48636,7 +48636,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1425.5, y: 222.6, z: 0}
+    - position: {x: 1405.7672, y: 222.26555, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -48646,7 +48646,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1435.5, y: 237.6, z: 0}
+    - position: {x: 1425.95, y: 237.76724, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -48656,7 +48656,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1441.5, y: 252.6, z: 0}
+    - position: {x: 1435, y: 252.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -48776,7 +48776,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1837.5, y: 228.6, z: 0}
+    - position: {x: 1809, y: 224, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -48786,7 +48786,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1840.5, y: 242.6, z: 0}
+    - position: {x: 1831, y: 242.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
