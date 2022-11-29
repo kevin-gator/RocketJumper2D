@@ -14,11 +14,11 @@ public class ComboCounter : MonoBehaviour
     private float _textScalingTime;
     public float textScaleAmount = 1.2f;
     public float rocketHits;
-    private float lastRocketHit;
+    private float _lastRocketHit;
     public float syncWindowTime = 0.05f; //The window in which two rockets must explode by the player in order to register as a sync jump
-    private float syncTextDisplayValue;
+    private float _syncTextDisplayValue;
     public float syncTextDisplayTime = 2f;
-    private float syncTextTimer;
+    private float _syncTextTimer;
     public ScreenShake screenShake;
 
     // Start is called before the first frame update
@@ -70,32 +70,32 @@ public class ComboCounter : MonoBehaviour
         //Sets sync text UI
         if (rocketHits > 1)
         {
-            syncTextDisplayValue = rocketHits;
-            syncTextTimer = syncTextDisplayTime;
+            _syncTextDisplayValue = rocketHits;
+            _syncTextTimer = syncTextDisplayTime;
         }
 
-        if(syncTextDisplayValue > 1)
+        if(_syncTextDisplayValue > 1)
         {
-            syncTextTimer -= Time.deltaTime;
+            _syncTextTimer -= Time.deltaTime;
         }
         else
         {
-            syncTextTimer = 0f;
+            _syncTextTimer = 0f;
         }
 
-        if(syncTextTimer > 0f)
+        if(_syncTextTimer > 0f)
         {
-            syncText.text = "SYNC\r\nx" + syncTextDisplayValue;
+            syncText.text = "SYNC\r\nx" + _syncTextDisplayValue;
         }
         else
         {
             syncText.text = "";
-            syncTextDisplayValue = 0f;
+            _syncTextDisplayValue = 0f;
         }
 
-        if (lastRocketHit > 0)
+        if (_lastRocketHit > 0)
         {
-            lastRocketHit -= Time.deltaTime;
+            _lastRocketHit -= Time.deltaTime;
         }
         else
         {
@@ -113,7 +113,7 @@ public class ComboCounter : MonoBehaviour
         //Increased counter by 1
         counter += 1;
         rocketHits += 1;
-        lastRocketHit = syncWindowTime;
+        _lastRocketHit = syncWindowTime;
         screenShake.Shake();
     }
 

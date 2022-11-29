@@ -36,7 +36,8 @@ public class Rocket : MonoBehaviour
     public GameObject explosionTrails;
 
     private float _comboMultiplier = 1f;
-    public float comboSpeedBonus = 0f; //Adjust this value to add a change in explosion force based on the player's combo count
+    public float comboSpeedScaling = 0f; //Adjust this value to add a change in explosion force based on the player's combo count
+    public float comboLogBase; // Adjust the base of the log function defining the combo returns
 
     private float _numHits;
 
@@ -87,7 +88,7 @@ public class Rocket : MonoBehaviour
 
             //Checks to make sure there is a rigidbody and that the collider gameObject isn't tagged No Knockback
             //(rockets are tagged this way, for example, to prevent explosions from moving them)
-            if (rb != null && rb.gameObject.tag != "NoKnockback")
+            if (rb != null && !rb.gameObject.CompareTag("NoKnockback"))
             {
                 //rb.AddExplosionForce(blastForce, transform.position, blastRadius);
                 if (rb.gameObject.layer == 3) //Checks if the collider gameObject is on the player layer
@@ -97,10 +98,11 @@ public class Rocket : MonoBehaviour
                     //Calls the AddCount function of the ComboCounter script
                     comboCounter.AddCount();
                     //Sets combo multiplier based on the combo speed bonus and the player's current combo count
-                    _comboMultiplier = (float)comboCounter.counter * comboSpeedBonus;
+                    _comboMultiplier = Mathf.Log(1 + (comboSpeedScaling * comboCounter.counter), comboLogBase);
                     //Adds explosion force using the blastForce float, and adjusted by the combo multiplier
+                    //scales logarithmically to a max of 1.5 
                     rb.AddExplosionForce(blastForce, transform.position,
-                        blastRadius * (1 + _comboMultiplier));
+                        blastRadius * (1 + _comboMultiplier >= 1.5 ? (float)1.5 : 1 + _comboMultiplier));
                 }
                 else //If the collider gameObject is on any other layer
                 {
