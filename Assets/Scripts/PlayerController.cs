@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
     private float _dampingMultiplier = 1f;
     public float dampingAmount;
 
+    public float horizontalRayDistance;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -122,7 +124,7 @@ public class PlayerController : MonoBehaviour
             grounded = false;
         }
         #endregion
-
+             
         #region General horizontal movement & slope handling
         //The next 4 lines of movement code were taken from https://youtu.be/KbtcEVCM7bw
         //Calculates desired move direction and velocity
@@ -188,8 +190,30 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
 
+        #region Handling wall collision velocity
+        RaycastHit2D wallHitLeft1 = Physics2D.Raycast(transform.position, Vector2.left, horizontalRayDistance, groundLayer);
+        RaycastHit2D wallHitRight1 = Physics2D.Raycast(transform.position, Vector2.right, horizontalRayDistance, groundLayer);
+
+        Color hue;
+
+        if (wallHitLeft1.collider != null || wallHitRight1.collider != null)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            hue = Color.green;
+        }
+        else
+        {
+            hue = Color.red;
+        }
+
+        Debug.DrawRay(transform.position, Vector2.left * horizontalRayDistance, hue);
+        Debug.DrawRay(transform.position, Vector2.right * horizontalRayDistance, hue);
+
+
+        #endregion
+
         #region In-Air Damping
-        if(!IsGrounded() || (rb.velocity.y > rampSlideThresholdY && Mathf.Abs(rb.velocity.x) > rampSlideThresholdX))
+        if (!IsGrounded() || (rb.velocity.y > rampSlideThresholdY && Mathf.Abs(rb.velocity.x) > rampSlideThresholdX))
         {
             if(rb.velocity.x > 1)
             {
