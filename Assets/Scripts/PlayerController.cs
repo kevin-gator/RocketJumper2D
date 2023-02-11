@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Transform groundCheck1;
-    //public Transform groundCheck2;
+    public Transform groundCheck2;
     //public Transform groundCheck3;
     public LayerMask groundLayer;
     public float speed = 8f;
@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
     public Vector2 lookDirection;
     public bool lookingRight;
     public bool rampSliding;
-
     private float _input;
     private float _jumpBufferCounter;
     private RaycastHit2D _raycastHit;
@@ -111,6 +110,12 @@ public class PlayerController : MonoBehaviour
         if (hit.collider)
         {
             _raycastHit = hit;
+            //Gets normal of the slope the player is standing on based on the raycast
+            slopeNormal = _raycastHit.normal;
+        }
+        else if(!IsGrounded())
+        {
+            slopeNormal = Vector2.zero;
         }
         #endregion
 
@@ -124,7 +129,24 @@ public class PlayerController : MonoBehaviour
             grounded = false;
         }
         #endregion
-             
+
+        #region Wallbug prevention
+        if(slopeNormal.x < -0.7072)
+        {
+            if(_input > 0)
+            {
+                _input = 0;
+            }
+        }
+        else if(slopeNormal.x > 0.7072)
+        {
+            if(_input < 0)
+            {
+                _input = 0;
+            }
+        }
+        #endregion
+
         #region General horizontal movement & slope handling
         //The next 4 lines of movement code were taken from https://youtu.be/KbtcEVCM7bw
         //Calculates desired move direction and velocity
@@ -137,8 +159,7 @@ public class PlayerController : MonoBehaviour
         //Finally multiplies by sign to reapply direction
         float movement = Mathf.Pow(Mathf.Abs(speedDiff) * accelRate, velPower) * Mathf.Sign(speedDiff);
 
-        //Gets normal of the slope the player is standing on based on the raycast
-        slopeNormal = _raycastHit.normal;
+        
 
         if (IsGrounded() && (rb.velocity.y <= rampSlideThresholdY || Mathf.Abs(rb.velocity.x) <= rampSlideThresholdX)) //If player is grounded and not rampsliding
         {
@@ -198,8 +219,23 @@ public class PlayerController : MonoBehaviour
 
         if (wallHitLeft1.collider != null || wallHitRight1.collider != null)
         {
-            rb.velocity = new Vector2(0, rb.velocity.y);
+            //rb.velocity = new Vector2(0, rb.velocity.y);
             hue = Color.green;
+            if (wallHitRight1.collider.gameObject.GetComponent<Material_NoTouch>() != null)
+            {
+                //hue = Color.yellow;
+                SpawnHandling spawnHandling = gameObject.GetComponent<SpawnHandling>();
+                spawnHandling.Respawn();
+            }
+            if(wallHitLeft1.collider.gameObject.GetComponent<Material_NoTouch>() != null)
+            {
+                SpawnHandling spawnHandling = gameObject.GetComponent<SpawnHandling>();
+                spawnHandling.Respawn();
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
         }
         else
         {
@@ -301,7 +337,7 @@ public class PlayerController : MonoBehaviour
     {
         //Returns true if the groundcheck GameObject at the player's feet is close enough to the ground,
         //using groundLayer as a layermask to determine what layer contains level geometry
-        if(Physics2D.OverlapCircle(groundCheck1.position, 0.2f, groundLayer)) //|| Physics2D.OverlapCircle(groundCheck2.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck3.position, 0.2f, groundLayer))
+        if(Physics2D.OverlapCircle(groundCheck1.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck2.position, 0.2f, groundLayer)) //|| Physics2D.OverlapCircle(groundCheck3.position, 0.2f, groundLayer))
         {
             return true;
         }
@@ -313,9 +349,15 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        // I don't really get how this works because it's using the new input system
-        // which I don't really understand, but it gets user input on the X axis somehow
-        _input = context.ReadValue<Vector2>().x;
+        // Gets movement input
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _input = 0f;
+        }
+        else
+        {
+            _input = context.ReadValue<Vector2>().x;
+        }
 
         if (context.started) //If player is pressing movement buttons, isMoving is true, otherwise false
         {

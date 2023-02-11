@@ -129,6 +129,7 @@ MonoBehaviour:
   lightIntensity: 1
   flickerRange: 0.1
   flickerSpeed: 0.5
+  yOffset: 3
 --- !u!95 &9190881445714981076
 Animator:
   serializedVersion: 4

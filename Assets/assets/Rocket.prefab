@@ -102,7 +102,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.23653209, y: 0.0016083717}
+  m_Offset: {x: -0.05533731, y: 0.0043998063}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -113,7 +113,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.15363336, y: 0.16650486}
+  m_Size: {x: 0.73737216, y: 0.28374448}
   m_EdgeRadius: 0
 --- !u!50 &2495886920237827773
 Rigidbody2D:
@@ -151,7 +151,7 @@ MonoBehaviour:
   blastRadius: 15
   blastForce: 100
   explosion: {fileID: 3229797619456211106, guid: 184b590b715b8444ca65a93ac9e6d85a, type: 3}
-  explosionTrails: {fileID: 3093060585636521776, guid: 01937ca0e83488447828693567b5dbe6, type: 3}
+  explosionTrails: {fileID: 6242832789413462799, guid: 01937ca0e83488447828693567b5dbe6, type: 3}
   comboSpeedScaling: 1
   comboLogBase: 100
 --- !u!95 &-3899865396289186057

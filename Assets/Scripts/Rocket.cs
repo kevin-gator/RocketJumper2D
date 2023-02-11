@@ -50,7 +50,7 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(_numHits > 0) //If there are any hits, explode
+        if (_numHits > 0) //If there are any hits, explode
         {
             Explode();
         }

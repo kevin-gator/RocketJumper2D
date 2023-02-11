@@ -13,6 +13,7 @@ public class Checkpoint : MonoBehaviour
     public float lightIntensity = 1.2f;
     public float flickerRange;
     public float flickerSpeed;
+    public float yOffset;
     
     // Start is called before the first frame update
     void Start()
@@ -53,7 +54,7 @@ public class Checkpoint : MonoBehaviour
         if(collision.gameObject.name == "Player")
         {
             SpawnHandling spawnHandling = collision.gameObject.GetComponent<SpawnHandling>();
-            spawnHandling.SetSpawnPosition(transform.position);
+            spawnHandling.SetSpawnPosition(new Vector2(transform.position.x, transform.position.y + yOffset));
             _active = true;
             _light.enabled = true;
         }
