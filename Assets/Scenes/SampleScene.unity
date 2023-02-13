@@ -4059,12 +4059,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -42.13939, y: -1.9194982}
-      - {x: -42.139893, y: -0.92049813}
+    - - {x: -22.139393, y: -1.919483}
+      - {x: -22.139893, y: -0.9204829}
       - {x: 107.86011, y: -0.9204982}
       - {x: 107.86011, y: -1.9194982}
-      - {x: -41.639893, y: -1.9194982}
-      - {x: -42.13939, y: -1.9194982}
+      - {x: -21.639893, y: -1.919483}
+      - {x: -22.139393, y: -1.919483}
 --- !u!114 &196257821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4080,7 +4080,7 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: -42.139893, y: -1.9199982, z: 0}
+    - position: {x: -22.139893, y: -1.9199829, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -4090,7 +4090,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
       m_CornerMode: 0
-    - position: {x: -42.139893, y: -0.91999817, z: 0}
+    - position: {x: -22.139893, y: -0.9199829, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -4192,8 +4192,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 32.86011, y: -1.4199982, z: 0}
-    m_Extent: {x: 75.25001, y: 0.75, z: 0}
+    m_Center: {x: 42.86011, y: -1.4199905, z: 0}
+    m_Extent: {x: 65.25001, y: 0.7500076, z: 0}
 --- !u!4 &196257823
 Transform:
   m_ObjectHideFlags: 0
@@ -10459,8 +10459,8 @@ PolygonCollider2D:
       - {x: 1405.7673, y: 222.26555}
       - {x: 1425.95, y: 237.76724}
       - {x: 1435, y: 252.6}
-      - {x: 1455.5, y: 252.6}
-      - {x: 1455.5, y: 250.6}
+      - {x: 1475.5, y: 252.6}
+      - {x: 1475.5, y: 250.6}
       - {x: 1605.5, y: 250.6}
       - {x: 1605.5, y: 251.6}
       - {x: 1625.5, y: 258.6}
@@ -11862,7 +11862,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1455.5, y: 252.6, z: 0}
+    - position: {x: 1475.5, y: 252.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -11872,7 +11872,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1455.5, y: 250.6, z: 0}
+    - position: {x: 1475.5, y: 250.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -19610,7 +19610,7 @@ SpriteShapeRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
@@ -20875,8 +20875,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialText: {fileID: 587513479}
   textToDisplay: Press and hold right mouse button to shoot your grappling hook.
-    You can only grapple to yellow surfaces. You can swing from these surfaces to
-    cross long distances.
+    You can only grapple to blue surfaces. You can swing from these surfaces to cross
+    long distances.
 --- !u!61 &845193483
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26972,19 +26972,20 @@ PolygonCollider2D:
       - {x: -34.5, y: 32.6}
       - {x: -34.384426, y: 14.498144}
       - {x: -24.535946, y: 14.498144}
-      - {x: -4.5552044, y: 13.2174015}
-      - {x: -4.5826483, y: 10.802198}
+      - {x: -4.472556, y: 11.0152025}
+      - {x: -4.5, y: 9.6}
       - {x: -24.58265, y: 10.802198}
       - {x: -34.5, y: 5.3500004}
       - {x: -34.5, y: -7.4003906}
       - {x: -4.882221, y: -7.4003906}
       - {x: -4.5, y: -7.3999996}
-      - {x: -4.5, y: 2.5996094}
-      - {x: 5.5, y: 2.6000004}
+      - {x: -4.5, y: 0.6000004}
+      - {x: 5.5, y: 1.6000004}
       - {x: 5.5, y: 16.350002}
       - {x: -4.540762, y: 19.14161}
-      - {x: -24.54076, y: 20.166203}
-      - {x: -24.555191, y: 24.64215}
+      - {x: -24.54076, y: 20.166204}
+      - {x: -24.5, y: 22.6}
+      - {x: -9.622181, y: 24.64215}
       - {x: 15.444809, y: 24.64215}
       - {x: 15.5, y: 2.6000004}
       - {x: 65.5, y: 2.6000557}
@@ -27384,7 +27385,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: -4.5552044, y: 13.217401, z: 0}
+    - position: {x: -4.472556, y: 11.0152025, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -27394,7 +27395,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 2
-    - position: {x: -4.5826483, y: 10.802198, z: 0}
+    - position: {x: -4.5, y: 9.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -27444,7 +27445,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 2
-    - position: {x: -4.5, y: 2.6000004, z: 0}
+    - position: {x: -4.5, y: 0.6000004, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -27454,7 +27455,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 2
-    - position: {x: 5.5, y: 2.6000004, z: 0}
+    - position: {x: 5.5, y: 1.6000004, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -27494,7 +27495,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 2
-    - position: {x: -24.555191, y: 24.64215, z: 0}
+    - position: {x: -24.5, y: 22.6, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -27504,6 +27505,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 2
+    - position: {x: -9.622181, y: 24.64215, z: 0}
+      leftTangent: {x: 0, y: 0, z: 0}
+      rightTangent: {x: 0, y: 0, z: 0}
+      mode: 0
+      height: 1
+      bevelCutoff: 0
+      bevelSize: 0
+      spriteIndex: 0
+      corner: 1
+      m_CornerMode: 1
     - position: {x: 15.444809, y: 24.64215, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
@@ -32651,7 +32662,7 @@ SpriteShapeRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
